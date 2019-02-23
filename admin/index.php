@@ -19,10 +19,13 @@
 use Xmf\Module\Admin; 
 
 require __DIR__ . '/admin_header.php';
+include '../plugin/social/facebook.php';
 
 $moduleAdmin = Admin::getInstance();
 $moduleAdmin->displayNavigation('index.php');
 $moduleAdmin->addConfigModuleVersion('system', 214);
 $moduleAdmin->displayIndex();
+
+echo Xmsocial_facebook::render();
 
 require __DIR__ . '/admin_footer.php';
