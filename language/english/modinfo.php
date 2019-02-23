@@ -21,6 +21,7 @@ define('_MI_XMSOCIAL_DESC', 'Social management');
 
 // Menu
 define('_MI_XMSOCIAL_MENU_HOME', 'Index');
+define('_MI_XMSOCIAL_MENU_SOCIAL', 'Social media');
 define('_MI_XMSOCIAL_MENU_ABOUT', 'About');
 
 // Pref

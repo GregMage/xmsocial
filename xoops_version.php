@@ -44,16 +44,16 @@ $modversion['adminmenu']   = 'admin/menu.php';
 //$modversion['onUpdate']         = 'include/update.php';
 
 // Tables
-//$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
-//$modversion['tables'][1] = '';
+$modversion['tables'][1] = 'xmsocial_social';
 
 
 // Admin Templates
-$modversion['templates'][] = array('file' => 'xmsocial_admin_.tpl', 'description' => '', 'type' => 'admin');
+$modversion['templates'][] = array('file' => 'xmsocial_admin_social.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
-$modversion['templates'][] = array('file' => 'xmsocial_.tpl', 'description' => '');
+//$modversion['templates'][] = array('file' => 'xmsocial_.tpl', 'description' => '');
 
 
 

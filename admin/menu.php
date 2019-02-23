@@ -33,6 +33,13 @@ $adminmenu[] = array(
     'icon'  => $pathIcon32 . 'home.png'
 ) ;
 
+// Social
+$adminmenu[] = array(
+    'title' => _MI_XMSOCIAL_MENU_SOCIAL ,
+    'link'  => 'admin/social.php' ,
+    'icon'  => $pathIcon32 . 'extention.png'
+) ;
+
 // About
 $adminmenu[] = array(
     'title' => _MI_XMSOCIAL_MENU_ABOUT ,

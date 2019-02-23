@@ -21,4 +21,5 @@ use Xmf\Module\Helper;
 $helper = Helper::getHelper(basename(dirname(__DIR__)));
 
 // Get handler
+$socialHandler = $helper->getHandler('xmsocial_social');
 
