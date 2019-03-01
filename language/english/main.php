@@ -21,7 +21,7 @@ define('_MA_XMSOCIAL_SOCIAL_ADD', 'Add social media');
 define('_MA_XMSOCIAL_SOCIAL_LIST', 'Social media list');
 
 // Error message
-define('_MA_XMSOCIAL_ERROR_NOSOCIAL', 'There are no social media in the database');
+define('_MA_XMSOCIAL_ERROR_NOSOCIAL', 'There are no social media');
 
 // Shared
 define('_MA_XMSOCIAL_ADD', 'Add');
@@ -35,6 +35,7 @@ define('_MA_XMSOCIAL_STATUS_NA', 'Disabled');
 
 // Social
 define('_MA_XMSOCIAL_SOCIAL_NAME', 'Name');
+define('_MA_XMSOCIAL_SOCIAL_OPTIONS', 'Options');
 define('_MA_XMSOCIAL_SOCIAL_RENDER', 'Render');
 define('_MA_XMSOCIAL_SOCIAL_SUREDEL', 'Sure to delete this social media? %s');
 define('_MA_XMSOCIAL_SOCIAL_TYPE', 'Type of social media');

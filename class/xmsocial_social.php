@@ -74,27 +74,57 @@ class xmsocial_social extends XoopsObject
 		}
         return $error_message;
     }
+	
+	    /**
+     * @param bool $action
+     * @return XoopsThemeForm
+     */
+    public function getFormSocial($action = false)
+    {
+        if ($action === false) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        include __DIR__ . '/../include/common.php';    
+        
+        $form = new XoopsThemeForm(_MA_XMSOCIAL_ADD, 'form', $action, 'post', true);
+        // social      
+        $social = new XoopsFormSelect(_MA_XMSOCIAL_SOCIAL_TYPE, 'social_type');
+		$SocialPlugin = new SocialPlugin();
+        $social_arr = $SocialPlugin->getSocialNames();
+        if (count($social_arr) == 0 ){
+            redirect_header('index.php', 3, _MA_XMSOCIAL_ERROR_NOSOCIAL);
+        }
+        foreach ($social_arr as $social_name) {
+            $social->addOption($social_name, $social_name);
+        }
+        $form->addElement($social, true);
+        
+        $form->addElement(new XoopsFormHidden('op', 'loadsocial'));        
+        // submit
+        $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        return $form;
+    }
 
     /**
      * @param bool $action
      * @return XoopsThemeForm
      */
-    public function getForm($action = false)
+    public function getForm($social_type = '', $action = false)
     {
         if ($action === false) {
             $action = $_SERVER['REQUEST_URI'];
         }
 		include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+		include_once XOOPS_ROOT_PATH . '/modules/xmsocial/class/OptionsForm.php';
         include __DIR__ . '/../include/common.php';
 
         //form title
         $title = $this->isNew() ? sprintf(_MA_XMSOCIAL_ADD) : sprintf(_MA_XMSOCIAL_EDIT);
 		
 		if (!$this->isNew()) {
-			$type = $this->getVar('social_type');
-        } else {
-			$type = 'A faire';
-		}
+			$social_type = $this->getVar('social_type');
+        }
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
 
@@ -102,11 +132,13 @@ class xmsocial_social extends XoopsObject
         $form->addElement(new XoopsFormText(_MA_XMSOCIAL_SOCIAL_NAME, 'social_name', 50, 50, $this->getVar('social_name')), true);
 		
 		//type
-		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_TYPE, '<strong>' . $type . '</strong>'));
-		$form->addElement(new XoopsFormHidden('social_type', $type));
+		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_TYPE, '<strong>' . $social_type . '</strong>'));
+		$form->addElement(new XoopsFormHidden('social_type', $social_type));
 		
 		// options
-		$form->addElement(new XoopsFormHidden('social_options', ''));
+		$SocialPlugin = new SocialPlugin();		
+		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_OPTIONS, $SocialPlugin->getOptionsEdit($social_type, array())));
+		$form->addElement(new XoopsFormHidden('social_options', 'A faire'));
 
         // weight
         $form->addElement(new XoopsFormText(_MA_XMSOCIAL_SOCIAL_WEIGHT, 'social_weight', 5, 5, $this->getVar('social_weight')));

@@ -47,10 +47,11 @@ switch ($op) {
 		$social_arr = $socialHandler->getall($criteria);
         $social_count = $socialHandler->getCount($criteria);
         $xoopsTpl->assign('social_count', $social_count);
+		$SocialPlugin = new SocialPlugin();
         if ($social_count > 0) {
             foreach (array_keys($social_arr) as $i) {
                 $social['id']          = $social_arr[$i]->getVar('social_id');
-                $social['render']      = 'A faire';
+                $social['render']      = $SocialPlugin->render($social_arr[$i]->getVar('social_type'));
                 $social['name']        = $social_arr[$i]->getVar('social_name');
                 $social['type']        = $social_arr[$i]->getVar('social_type');
                 $social['weight']      = $social_arr[$i]->getVar('social_weight');
@@ -74,8 +75,23 @@ switch ($op) {
 		$moduleAdmin->addItemButton(_MA_XMSOCIAL_SOCIAL_LIST, 'social.php', 'list');
         $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
 		$obj  = $socialHandler->create();
-		$form = $obj->getForm();
+		$form = $obj->getFormSocial();
 		$xoopsTpl->assign('form', $form->render());
+        break;
+		
+	// Loadsocial
+    case 'loadsocial':
+        // Module admin
+        $moduleAdmin->addItemButton(_MA_XMSOCIAL_SOCIAL_LIST, 'social.php', 'list');
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());  
+        $social_type = Request::getString('social_type', '');
+        if ($social_type == '') {
+            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NOSOCIAL);
+        } else {
+			$obj  = $socialHandler->create();
+			$form = $obj->getForm($social_type);
+			$xoopsTpl->assign('form', $form->render());
+        }
         break;
         
     // Edit

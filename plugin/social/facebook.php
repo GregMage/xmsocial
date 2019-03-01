@@ -17,27 +17,29 @@
  * @author          Mage Gregory (AKA Mage)
  */
 
- class Xmsocial_facebook
+ class XmsocialFacebook
  {
-	 
-	/**
-     * Disposition
-     *
-     * @var string
-     */
-    public $dataLayout = '';
+	
+	private $dataLayout = '';
 	
 	
-	/**
-	* Constructor
-	*
-	* @param CriteriaElement|null $ele
-	* @param string $condition
-	*/
-    public function __construct()
-    {
-
-    }
+	public static function optionsEdit($options)
+	{
+		$form = new XmsocialOptionsForm();
+		// Data layout
+		$formDataLayout = new XoopsFormSelect('Data layout', 'options[0]', $options[0], 5, true);
+		$formDataLayout->addOption(0, 'Standard');
+		$formDataLayout->addOption(1, 'box_count');
+		$formDataLayout->addOption(2, 'button_count');
+		$formDataLayout->addOption(3, 'button');
+		$form->addElement($formDataLayout);		
+		// Data size
+		$formSizeLayout = new XoopsFormSelect('Data size', 'options[1]', $options[1], 5, true);
+		$formSizeLayout->addOption(0, 'Small');
+		$formSizeLayout->addOption(1, 'Large');
+		$form->addElement($formSizeLayout);
+		return $form->render();
+	}
 	 
 	 
 	/**
@@ -45,12 +47,12 @@
 	*
 	* @return string
 	*/
-    public static function render()
+    public static function render($url)
     {
-		$ret  = '<!-- Load Facebook SDK for JavaScript -->
-  <div id="fb-root"></div>
-<script async defer src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2"></script>';
-		$ret  .= '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="recommend" data-size="small" data-show-faces="false" data-share="true"></div>';
+		$ret  = '<!-- Load Facebook SDK for JavaScript -->';
+		$ret .= '<div id="fb-root"></div>';
+		$ret .= '<script async defer src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2"></script>';
+		$ret .= '<div class="fb-like" data-href="' . $url . '" data-layout="standard" data-action="recommend" data-size="small" data-show-faces="false" data-share="true"></div>';
 
         return $ret;
     }
