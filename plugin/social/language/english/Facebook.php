@@ -10,11 +10,16 @@
 */
 
 /**
- * xmsocial module
+ * Plugin Facebook for xmsocial module
  *
- * @copyright       XOOPS Project (https://xoops.org)
+ * @copyright       XOOPS Project (http://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-
-xoops_cp_footer();
+// Info
+define('_AM_FACEBOOK_ACTION', 'Type of action');
+define('_AM_FACEBOOK_LAYOUT', 'Layout');
+define('_AM_FACEBOOK_SIZE', 'Button size');
+define('_AM_FACEBOOK_WIDTH', 'Width(The pixel width of the plugin)');
+define('_AM_FACEBOOK_SHARE', 'Add a Share button');
+define('_AM_FACEBOOK_FACE', 'View friend\'s faces');

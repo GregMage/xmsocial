@@ -64,7 +64,8 @@ class xmsocial_social extends XoopsObject
         
         $this->setVar('social_name', Xmf\Request::getString('social_name', ''));
         $this->setVar('social_type', Xmf\Request::getString('social_type', ''));
-        $this->setVar('social_options',  Xmf\Request::getText('social_options', ''));
+		$SocialPlugin = new SocialPlugin();
+        $this->setVar('social_options',  $SocialPlugin->optionsSave(Xmf\Request::getString('social_type', '')));
         $this->setVar('social_status', Xmf\Request::getInt('social_status', 0));
 		$this->setVar('social_weight', Xmf\Request::getInt('social_weight', 0));
 		if ($socialHandler->insert($this)) {
@@ -136,8 +137,13 @@ class xmsocial_social extends XoopsObject
 		$form->addElement(new XoopsFormHidden('social_type', $social_type));
 		
 		// options
-		$SocialPlugin = new SocialPlugin();		
-		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_OPTIONS, $SocialPlugin->getOptionsEdit($social_type, array())));
+		$SocialPlugin = new SocialPlugin();
+		if ($this->getVar('social_options') == ''){
+			$options = array();
+		} else {
+			$options = explode(',', $this->getVar('social_options'));
+		}		
+		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_OPTIONS, $SocialPlugin->getOptionsEdit($social_type, $options)));
 		$form->addElement(new XoopsFormHidden('social_options', 'A faire'));
 
         // weight

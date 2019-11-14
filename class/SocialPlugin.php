@@ -26,7 +26,6 @@ class SocialPlugin {
     {
 		$social_names = XoopsLists::getFileListByExtension(XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/', array('php'));
 		foreach ($social_names as $social_name) {
-			echo 'class ' . $social_name . ' chargée<br>';
 			$this->socialNames[] = basename($social_name, '.php');
 			include_once XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/' . $social_name;
 		}
@@ -39,6 +38,7 @@ class SocialPlugin {
 	
 	public function getOptionsEdit($social_name = '', $options)
 	{
+		$this->loadLanguage($social_name);
 		if (in_array($social_name, $this->socialNames)) {			
 			return basename ('Xmsocial' . $social_name)::optionsEdit($options);
 		} else {			
@@ -46,22 +46,34 @@ class SocialPlugin {
 		}
 	}
 	
-	public function render($social_name = '')
-	{		
+	public function optionsSave($social_name = '')
+	{
 		if (in_array($social_name, $this->socialNames)) {			
-			return basename ('Xmsocial' . $social_name)::render('');
+			return basename ('Xmsocial' . $social_name)::optionsSave();
 		} else {			
 			return '';
 		}
 	}
 	
-	public function renders()
-	{
-		
-		foreach ($this->socialNames as $social_name) {
-			
-			echo '<br>prout ' . $social_name . ' chargée';
-			echo basename ('Xmsocial' . $social_name)::render('jjj');
+	public function render($social_name = '', $options = array())
+	{		
+		if (in_array($social_name, $this->socialNames)) {			
+			return basename ('Xmsocial' . $social_name)::render('', $options);
+		} else {			
+			return '';
 		}
 	}
+	
+	public function loadLanguage($social_name = '')
+    {
+        $language = $GLOBALS['xoopsConfig']['language'];
+        if (!file_exists($fileinc = XOOPS_ROOT_PATH . "/modules/xmsocial/plugin/social/language/{$language}/{$social_name}.php")) {
+            if (!file_exists($fileinc = XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/language/english/{$social_name}.php')) {
+                return false;
+            }
+        }
+        $ret = include_once $fileinc;
+
+        return $ret;
+    }
 }

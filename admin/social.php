@@ -12,7 +12,7 @@
 /**
  * xmsocial module
  *
- * @copyright       XOOPS Project (http://xoops.org)
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
@@ -51,7 +51,8 @@ switch ($op) {
         if ($social_count > 0) {
             foreach (array_keys($social_arr) as $i) {
                 $social['id']          = $social_arr[$i]->getVar('social_id');
-                $social['render']      = $SocialPlugin->render($social_arr[$i]->getVar('social_type'));
+				$options = explode(',', $social_arr[$i]->getVar('social_options'));
+                $social['render']      = $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $options);
                 $social['name']        = $social_arr[$i]->getVar('social_name');
                 $social['type']        = $social_arr[$i]->getVar('social_type');
                 $social['weight']      = $social_arr[$i]->getVar('social_weight');
