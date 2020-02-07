@@ -37,6 +37,13 @@ $adminmenu[] = array(
 $adminmenu[] = array(
     'title' => _MI_XMSOCIAL_MENU_SOCIAL ,
     'link'  => 'admin/social.php' ,
+    'icon'  => $pathIcon32 . 'groupmod.png'
+) ;
+
+// Rating
+$adminmenu[] = array(
+    'title' => _MI_XMSOCIAL_MENU_RATING ,
+    'link'  => 'admin/rating.php' ,
     'icon'  => $pathIcon32 . 'extention.png'
 ) ;
 

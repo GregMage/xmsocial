@@ -22,13 +22,13 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 /**
- * Class xmdoc_category
+ * Class xmsocial_social
  */
 class xmsocial_social extends XoopsObject
 {
     // constructor
     /**
-     * xmdoc_category constructor.
+     * xmsocial_social constructor.
      */
     public function __construct()
     {
