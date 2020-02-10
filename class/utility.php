@@ -37,6 +37,11 @@ class XmsocialUtility{
 		if ($stars < 3){			
 			$stars = 3;
 		}
+		for ($count = 1; $count <= $stars; $count++){
+			$count_stars = $count;
+			$xoopsTpl->append_by_ref('xmsocial_stars', $count_stars);
+			unset($count_stars);
+		}
         $xmsocialHelper->loadLanguage('main');        
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');

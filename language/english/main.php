@@ -43,10 +43,5 @@ define('_MA_XMSOCIAL_SOCIAL_WEIGHT', 'Weight');
 
 // Rating
 define('_MA_XMSOCIAL_RATING_RATING', 'Rating');
-define('_MA_XMSOCIAL_RATING_RATING1', '1');
-define('_MA_XMSOCIAL_RATING_RATING2', '2');
-define('_MA_XMSOCIAL_RATING_RATING3', '3');
-define('_MA_XMSOCIAL_RATING_RATING4', '4');
-define('_MA_XMSOCIAL_RATING_RATING5', '5');
 define('_MA_XMSOCIAL_RATING_VOTES', '%s ratings totally');
 
