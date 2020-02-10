@@ -55,7 +55,7 @@ $modversion['templates'][] = array('file' => 'xmsocial_admin_social.tpl', 'descr
 $modversion['templates'][] = array('file' => 'xmsocial_admin_rating.tpl', 'description' => '', 'type' => 'admin');
 
 // User Templates
-//$modversion['templates'][] = array('file' => 'xmsocial_.tpl', 'description' => '');
+$modversion['templates'][] = array('file' => 'xmsocial_rating.tpl', 'description' => '');
 
 
 

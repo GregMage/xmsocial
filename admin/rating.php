@@ -30,8 +30,11 @@ switch ($op) {
     case 'list':
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
-        $xoTheme->addStylesheet(XOOPS_URL . '/modules/xmsocial/assets/css/rating.css');
+        //$xoTheme->addStylesheet(XOOPS_URL . '/modules/xmsocial/assets/css/rating.css');
         $xoTheme->addScript('modules/system/js/admin.js');
+		
+		xoops_load('utility', 'xmsocial');
+		XmsocialUtility::renderRating($xoopsTpl, $xoTheme, 'xmsocial', 12, 5, 3.5, 3, 'xmsocial');
         // Module admin
         
         break;
