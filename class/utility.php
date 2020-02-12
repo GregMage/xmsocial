@@ -42,10 +42,8 @@ class XmsocialUtility{
 			$xoopsTpl->append_by_ref('xmsocial_stars', $count_stars);
 			unset($count_stars);
 		}
-        $xmsocialHelper->loadLanguage('main');        
-		$helper = Helper::getHelper($modulename);
-		$moduleid = $helper->getModule()->getVar('mid');
-		$xoopsTpl->assign('xmsocial_moduleid', $moduleid);	
+        $xmsocialHelper->loadLanguage('main');
+		$xoopsTpl->assign('xmsocial_module', $modulename);	
 		$xoopsTpl->assign('xmsocial_size', (25 * number_format($rating, 1)) . 'px');	
 		$xoopsTpl->assign('xmsocial_itemid', $itemid);		
 		$xoopsTpl->assign('xmsocial_rating', number_format($rating, 1));

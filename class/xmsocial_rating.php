@@ -51,6 +51,7 @@ class xmsocial_rating extends XoopsObject
         $new_enreg = $xoopsDB->getInsertId();
         return $new_enreg;
     }
+}
 
 /**
  * Class xmsocialxmsocial_ratingHandler

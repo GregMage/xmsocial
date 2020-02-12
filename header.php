@@ -12,15 +12,20 @@
 /**
  * xmsocial module
  *
- * @copyright       XOOPS Project (http://xoops.org)
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-class_exists('\Xmf\Module\Admin') or die('XMF is required.');
 use Xmf\Module\Helper;
-$helper = Helper::getHelper(basename(dirname(__DIR__)));
+$path = dirname(dirname(__DIR__));
+require_once $path . '/mainfile.php';
+include_once __DIR__ . '/include/common.php';
 
-// Get handler
-$socialHandler = $helper->getHandler('xmsocial_social');
-$ratingHandler = $helper->getHandler('xmsocial_rating');
+//xoops_load('utility', basename(__DIR__));
+xoops_load('RatingPlugin', basename(__DIR__));
 
+$helper     = Helper::getHelper('xmsocial');
+$permHelper = new Helper\Permission();
+
+// Load language files
+$helper->loadLanguage('main');

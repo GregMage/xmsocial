@@ -10,17 +10,39 @@
 */
 
 /**
- * xmsocial module
+ * Plugin xmnews for xmsocial module
  *
  * @copyright       XOOPS Project (http://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-class_exists('\Xmf\Module\Admin') or die('XMF is required.');
+ 
+use \Xmf\Request;
 use Xmf\Module\Helper;
-$helper = Helper::getHelper(basename(dirname(__DIR__)));
 
-// Get handler
-$socialHandler = $helper->getHandler('xmsocial_social');
-$ratingHandler = $helper->getHandler('xmsocial_rating');
-
+ class Xmsocialxmnews
+ {
+	
+	private $dataLayout = '';
+	
+	
+	public static function RedirectUrl($itemid)
+	{
+		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;
+	}
+	
+	public static function SaveRating($itemid, $rating, $votes)
+	{
+		$helper = Helper::getHelper('xmnews');
+		$newsHandler  = $helper->getHandler('xmnews_news');
+		$obj = $newsHandler->get($itemid);
+		$obj->setVar('news_rating', $rating);
+		$obj->setVar('news_votes', $votes);
+		if ($newsHandler->insert($obj)) {
+			return True;
+		} else {
+			return $obj->getHtmlErrors();
+		}
+	}
+	 
+ }
