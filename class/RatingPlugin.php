@@ -45,6 +45,17 @@ class RatingPlugin {
 		}
 	}
 	
+	public function ListPlugin()
+	{
+		$active_plugin = array();
+		foreach ($this->ratingNames as $rating_name) {
+			if (xoops_isActiveModule($rating_name)){
+				$active_plugin[] = ['name' => $rating_name, 'id' => basename ('Xmsocial' . $rating_name)::getPluginId()];
+			}			
+		}
+		return $active_plugin;
+	}
+	
 	public function RedirectUrl($rating_name = '', $itemid)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {			

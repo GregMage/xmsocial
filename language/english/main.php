@@ -32,6 +32,8 @@ define('_MA_XMSOCIAL_REDIRECT_SAVE', 'Successfully saved');
 define('_MA_XMSOCIAL_STATUS', 'Status');
 define('_MA_XMSOCIAL_STATUS_A', 'Active');
 define('_MA_XMSOCIAL_STATUS_NA', 'Disabled');
+define('_MA_XMSOCIAL_ERROR_NOPLUGIN', 'No plugins available');
+
 
 // Social
 define('_MA_XMSOCIAL_SOCIAL_NAME', 'Name');
@@ -49,6 +51,11 @@ define('_MA_XMSOCIAL_RATE_RATED', 'Thank you for your vote');
 define('_MA_XMSOCIAL_RATE_NOTRATED', 'Your vote could not be recorded!');
 define('_MA_XMSOCIAL_RATE_ERRORPLUGIN', 'Error: The plugin does not exist!');
 define('_MA_XMSOCIAL_RATE_ERRORMODULE', 'Error: The selected module is not activated!');
+
+// Permission
+define('_MA_XMSOCIAL_PERMISSION_RATING', 'Rating permissions');
+define('_MA_XMSOCIAL_PERMISSION_RATING_DSC', 'Select groups that can rating an item');
+
 
 
 

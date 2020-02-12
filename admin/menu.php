@@ -16,40 +16,40 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
-
+use Xmf\Module\Admin; 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 // get path to icons
-$pathIcon32='';
-if (class_exists('Xmf\Module\Admin', true)) {
-    $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-}
+$pathIcon32 = Admin::menuIconPath('');
 
-$adminmenu=array();
+$adminmenu = [];
 // Index
-$adminmenu[] = array(
-    'title' => _MI_XMSOCIAL_MENU_HOME ,
-    'link'  => 'admin/index.php' ,
+$adminmenu[] = [
+    'title' => _MI_XMSOCIAL_MENU_HOME,
+    'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . 'home.png'
-) ;
-
+];
 // Social
-$adminmenu[] = array(
-    'title' => _MI_XMSOCIAL_MENU_SOCIAL ,
+$adminmenu[] = [
+    'title' => _MI_XMSOCIAL_MENU_SOCIAL,
     'link'  => 'admin/social.php' ,
     'icon'  => $pathIcon32 . 'groupmod.png'
-) ;
-
+];
 // Rating
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XMSOCIAL_MENU_RATING ,
     'link'  => 'admin/rating.php' ,
     'icon'  => $pathIcon32 . 'extention.png'
-) ;
-
+];
+// Permission
+$adminmenu[] = [
+    'title' => _MI_XMSOCIAL_MENU_PERMISSION,
+    'link'  => 'admin/permission.php',
+    'icon'  => $pathIcon32 . 'permissions.png'
+];
 // About
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XMSOCIAL_MENU_ABOUT ,
     'link'  => 'admin/about.php' ,
     'icon'  => $pathIcon32 . 'about.png'
-) ;
+];

@@ -23,7 +23,12 @@ use Xmf\Module\Helper;
  class Xmsocialxmnews
  {
 	
-	private $dataLayout = '';
+	private static $plugin_id = 1;
+	
+	public static function getPluginId()
+	{
+		return self::$plugin_id;
+	}
 	
 	
 	public static function RedirectUrl($itemid)
@@ -39,7 +44,7 @@ use Xmf\Module\Helper;
 		$obj->setVar('news_rating', $rating);
 		$obj->setVar('news_votes', $votes);
 		if ($newsHandler->insert($obj)) {
-			return True;
+			return true;
 		} else {
 			return $obj->getHtmlErrors();
 		}

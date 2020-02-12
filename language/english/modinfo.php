@@ -23,6 +23,7 @@ define('_MI_XMSOCIAL_DESC', 'Social management');
 define('_MI_XMSOCIAL_MENU_HOME', 'Index');
 define('_MI_XMSOCIAL_MENU_SOCIAL', 'Social media');
 define('_MI_XMSOCIAL_MENU_RATING', 'Rating');
+define('_MI_XMSOCIAL_MENU_PERMISSION', 'Permissions');
 define('_MI_XMSOCIAL_MENU_ABOUT', 'About');
 
 // Pref
