@@ -44,11 +44,9 @@
                 </td>
                 <td class="xo-actions txtcenter">
                     <a class="tooltip" href="social.php?op=edit&amp;social_id=<{$social.id}>" title="<{$smarty.const._MA_XMSOCIAL_EDIT}>">
-                        <img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSOCIAL_EDIT}>"/>
-                    </a>
+                        <img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSOCIAL_EDIT}>"/></a>
                     <a class="tooltip" href="social.php?op=del&amp;social_id=<{$social.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
-                        <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"/>
-                    </a>
+                        <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"/></a>
                 </td>
             </tr>
         <{/foreach}>
