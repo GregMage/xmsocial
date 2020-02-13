@@ -52,6 +52,13 @@ define('_MA_XMSOCIAL_RATE_NOTRATED', 'Your vote could not be recorded!');
 define('_MA_XMSOCIAL_RATE_ERRORPLUGIN', 'Error: The plugin does not exist!');
 define('_MA_XMSOCIAL_RATE_ERRORMODULE', 'Error: The selected module is not activated!');
 
+define('_MA_XMSOCIAL_RATING_DATE', 'Date');
+define('_MA_XMSOCIAL_RATING_VALUE', 'Value');
+define('_MA_XMSOCIAL_RATING_UID', 'Uname');
+define('_MA_XMSOCIAL_RATING_HOSTNAME', 'Hostname');
+define('_MA_XMSOCIAL_RATING_MODULENAME', 'Module name');
+define('_MA_XMSOCIAL_RATING_VIEW', 'View item');
+
 // Permission
 define('_MA_XMSOCIAL_PERMISSION_RATING', 'Rating permissions');
 define('_MA_XMSOCIAL_PERMISSION_RATING_DSC', 'Select groups that can rating an item');

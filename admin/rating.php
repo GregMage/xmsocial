@@ -30,12 +30,41 @@ switch ($op) {
     case 'list':
         // Define Stylesheet
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
-        //$xoTheme->addStylesheet(XOOPS_URL . '/modules/xmsocial/assets/css/rating.css');
         $xoTheme->addScript('modules/system/js/admin.js');
-		
-		xoops_load('utility', 'xmsocial');
-		XmsocialUtility::renderRating($xoopsTpl, $xoTheme, 'xmsocial', 12, 5, 3.5, 3, 'xmsocial');
-        // Module admin
+		// Get start pager
+        $start = Request::getInt('start', 0);
+        $xoopsTpl->assign('start', $start);
+        
+        // Criteria
+        $criteria = new CriteriaCompo();
+        $criteria->setSort('rating_date');
+        $criteria->setOrder('DESC');
+        $criteria->setStart($start);
+        $criteria->setLimit($nb_limit);
+		$rating_arr = $ratingHandler->getall($criteria);
+        $rating_count = $ratingHandler->getCount($criteria);
+        $xoopsTpl->assign('rating_count', $rating_count);
+		$SocialPlugin = new SocialPlugin();
+        if ($rating_count > 0) {
+            foreach (array_keys($rating_arr) as $i) {
+                $rating['id']          = $rating_arr[$i]->getVar('rating_id');
+                $rating['itemid']      = $rating_arr[$i]->getVar('rating_itemid');
+                $rating['modulename']  = $rating_arr[$i]->getVar('rating_modid') . 'A faire';
+                $rating['value']       = $rating_arr[$i]->getVar('rating_value');
+                $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
+                $rating['hostname']    = $rating_arr[$i]->getVar('rating_hostname');
+                $rating['date']		   = formatTimestamp($rating_arr[$i]->getVar('rating_date'), 'm');
+                $xoopsTpl->append_by_ref('rating', $rating);
+                unset($rating);
+            }
+            // Display Page Navigation
+            if ($rating_count > $nb_limit) {
+                $nav = new XoopsPageNav($rating_count, $nb_limit, $start, 'start');
+                $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
+            }
+        } else {
+            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);        
+		}
         
         break;
             
