@@ -27,25 +27,32 @@ class XmsocialUtility{
 	public static function renderRating($xoopsTpl, $xoTheme, $modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0)
     {
         include __DIR__ . '/../include/common.php';
-        
-        $xoTheme->addStylesheet( XOOPS_URL . '/modules/xmsocial/assets/css/rating.css', null );        
-        $xmsocialHelper = Helper::getHelper('xmsocial');
-		
+		$permHelper = new Helper\Permission();
+		$xmsocialHelper = Helper::getHelper('xmsocial');
+		$xmsocialHelper->loadLanguage('main');
 		if ($stars > 10){			
 			$stars = 10;
 		}
 		if ($stars < 3){			
 			$stars = 3;
 		}
-		for ($count = 1; $count <= $stars; $count++){
-			$count_stars = $count;
-			$xoopsTpl->append_by_ref('xmsocial_stars', $count_stars);
-			unset($count_stars);
-		}
-        $xmsocialHelper->loadLanguage('main');
-		$xoopsTpl->assign('xmsocial_module', $modulename);	
-		$xoopsTpl->assign('xmsocial_size', (25 * number_format($rating, 1)) . 'px');	
-		$xoopsTpl->assign('xmsocial_itemid', $itemid);		
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){	
+			$xoopsTpl->assign('xmsocial_perm', false);
+		} else {        
+			$xoTheme->addStylesheet( XOOPS_URL . '/modules/xmsocial/assets/css/rating.css', null );
+			$xoopsTpl->assign('xmsocial_perm', true);			
+			
+			for ($count = 1; $count <= $stars; $count++){
+				$count_stars = $count;
+				$xoopsTpl->append_by_ref('xmsocial_stars', $count_stars);
+				unset($count_stars);
+			}			
+			$xoopsTpl->assign('xmsocial_module', $modulename);	
+			$xoopsTpl->assign('xmsocial_size', (25 * number_format($rating, 1)) . 'px');	
+			$xoopsTpl->assign('xmsocial_itemid', $itemid);
+		}			
 		$xoopsTpl->assign('xmsocial_rating', number_format($rating, 1));
 		$xoopsTpl->assign('xmsocial_total', $stars);
 		$xoopsTpl->assign('xmsocial_votes', sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes));
