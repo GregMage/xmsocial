@@ -16,6 +16,7 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
+ use Xmf\Module\Helper;
 
 class RatingPlugin {
 	
@@ -50,7 +51,9 @@ class RatingPlugin {
 		$active_plugin = array();
 		foreach ($this->ratingNames as $rating_name) {
 			if (xoops_isActiveModule($rating_name)){
-				$active_plugin[] = ['name' => $rating_name, 'id' => basename ('Xmsocial' . $rating_name)::getPluginId()];
+				$helper = Helper::getHelper($rating_name);
+				$moduleid = $helper->getModule()->getVar('mid');
+				$active_plugin[] = ['name' => $rating_name, 'id' => $moduleid];
 			}			
 		}
 		return $active_plugin;
@@ -58,7 +61,7 @@ class RatingPlugin {
 	
 	public function RedirectUrl($rating_name = '', $itemid)
 	{
-		if (in_array($rating_name, $this->ratingNames)) {			
+		if (in_array($rating_name, $this->ratingNames)) {
 			return basename ('Xmsocial' . $rating_name)::RedirectUrl($itemid);
 		} else {			
 			return '';

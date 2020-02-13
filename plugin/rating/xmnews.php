@@ -23,14 +23,6 @@ use Xmf\Module\Helper;
  class Xmsocialxmnews
  {
 	
-	private static $plugin_id = 1;
-	
-	public static function getPluginId()
-	{
-		return self::$plugin_id;
-	}
-	
-	
 	public static function RedirectUrl($itemid)
 	{
 		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;

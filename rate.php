@@ -38,9 +38,11 @@ if ($RatingPlugin->CheckPlugin($modulename) == false){
 	redirect_header(XOOPS_URL, 10, _MA_XMSOCIAL_RATE_ERRORPLUGIN);
 }
 $redirect_url = $RatingPlugin->RedirectUrl($modulename, $itemid);
-
 $helper = Helper::getHelper($modulename);
 $moduleid = $helper->getModule()->getVar('mid');
+if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){	
+	redirect_header($redirect_url, 3, _NOPERM);
+}
 $userid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('rating_itemid', $itemid));
