@@ -23,8 +23,12 @@ use Xmf\Module\Helper;
  class Xmsocialxmdoc
  {
 	
-	public static function RedirectUrl($itemid)
+	public static function RedirectUrl($itemid, $options)
 	{
+		if ($options['mod'] == 'xmnews'){
+			return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $options['id'];
+		}
+		
 		return XOOPS_URL . '/modules/xmdoc/index.php';
 	}
 	

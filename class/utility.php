@@ -24,10 +24,11 @@ use Xmf\Module\Helper;
 
 class XmsocialUtility{
 	
-	public static function renderRating($xoopsTpl, $xoTheme, $modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0)
+	public static function renderRating($xoTheme, $modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0, $options = array())
     {
-        include __DIR__ . '/../include/common.php';
-		$permHelper = new Helper\Permission();
+        $xmsocial_rating = array();
+		include __DIR__ . '/../include/common.php';
+		$permHelper = new Helper\Permission('xmsocial');
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');
 		if ($stars > 10){			
@@ -36,25 +37,28 @@ class XmsocialUtility{
 		if ($stars < 3){			
 			$stars = 3;
 		}
+		$options = serialize($options);
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
-		if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){	
-			$xoopsTpl->assign('xmsocial_perm', false);
-		} else {        
+		if ($permHelper->checkPermission('xmsocial_rating', $moduleid) === false){	
+			$xmsocial_rating['perm'] = false;
+		} else {    
 			$xoTheme->addStylesheet( XOOPS_URL . '/modules/xmsocial/assets/css/rating.css', null );
-			$xoopsTpl->assign('xmsocial_perm', true);			
-			
+			$xmsocial_rating['perm'] = true;			
 			for ($count = 1; $count <= $stars; $count++){
 				$count_stars = $count;
-				$xoopsTpl->append_by_ref('xmsocial_stars', $count_stars);
+				$xmsocial_rating['stars'][] = $count_stars;
 				unset($count_stars);
-			}			
-			$xoopsTpl->assign('xmsocial_module', $modulename);	
-			$xoopsTpl->assign('xmsocial_size', (25 * number_format($rating, 1)) . 'px');	
-			$xoopsTpl->assign('xmsocial_itemid', $itemid);
+			}
+			$xmsocial_rating['module'] = $modulename;
+			$xmsocial_rating['size'] = (25 * number_format($rating, 1)) . 'px';
+			$xmsocial_rating['itemid'] = $itemid;
 		}			
-		$xoopsTpl->assign('xmsocial_rating', number_format($rating, 1));
-		$xoopsTpl->assign('xmsocial_total', $stars);
-		$xoopsTpl->assign('xmsocial_votes', sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes));
+		$xmsocial_rating['rating'] = number_format($rating, 1);
+		$xmsocial_rating['total'] = $stars;
+		$xmsocial_rating['votes'] = sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes);
+		$xmsocial_rating['options'] = $options;
+		
+		return $xmsocial_rating;
     }
 }

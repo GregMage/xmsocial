@@ -23,7 +23,7 @@ use Xmf\Module\Helper;
  class Xmsocialxmnews
  {
 	
-	public static function RedirectUrl($itemid)
+	public static function RedirectUrl($itemid, $options)
 	{
 		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;
 	}

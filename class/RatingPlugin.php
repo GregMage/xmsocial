@@ -59,10 +59,10 @@ class RatingPlugin {
 		return $active_plugin;
 	}
 	
-	public function RedirectUrl($rating_name = '', $itemid)
+	public function RedirectUrl($rating_name = '', $itemid, $options = array())
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
-			return basename ('Xmsocial' . $rating_name)::RedirectUrl($itemid);
+			return basename ('Xmsocial' . $rating_name)::RedirectUrl($itemid, $options);
 		} else {			
 			return '';
 		}

@@ -26,6 +26,7 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 $modulename = Request::getString('mod', '');
 $itemid = Request::getInt('itemid', 0);
 $rating = Request::getInt('rating', 0);
+$options = unserialize(Request::getString('opt', ''));
 
 if ($modulename == '' || $itemid == 0 || $rating < 1 || $rating > 10){
 	redirect_header(XOOPS_URL, 2, _NOPERM);
@@ -37,7 +38,7 @@ $RatingPlugin = new RatingPlugin();
 if ($RatingPlugin->CheckPlugin($modulename) == false){
 	redirect_header(XOOPS_URL, 10, _MA_XMSOCIAL_RATE_ERRORPLUGIN);
 }
-$redirect_url = $RatingPlugin->RedirectUrl($modulename, $itemid);
+$redirect_url = $RatingPlugin->RedirectUrl($modulename, $itemid, $options);
 $helper = Helper::getHelper($modulename);
 $moduleid = $helper->getModule()->getVar('mid');
 if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){	
