@@ -45,7 +45,8 @@ define('_MA_XMSOCIAL_SOCIAL_WEIGHT', 'Weight');
 
 // Rating
 define('_MA_XMSOCIAL_RATING_RATING', 'Rating');
-define('_MA_XMSOCIAL_RATING_VOTES', '%s ratings totally');
+define('_MA_XMSOCIAL_RATING_VOTE', '(%s vote)');
+define('_MA_XMSOCIAL_RATING_VOTES', '(%s votes)');
 define('_MA_XMSOCIAL_RATE_ALREADYVOTED', 'You have already voted!');
 define('_MA_XMSOCIAL_RATE_RATED', 'Thank you for your vote');
 define('_MA_XMSOCIAL_RATE_NOTRATED', 'Your vote could not be recorded!');
@@ -62,7 +63,3 @@ define('_MA_XMSOCIAL_RATING_VIEW', 'View item');
 // Permission
 define('_MA_XMSOCIAL_PERMISSION_RATING', 'Rating permissions');
 define('_MA_XMSOCIAL_PERMISSION_RATING_DSC', 'Select groups that can rating an item');
-
-
-
-

@@ -61,4 +61,18 @@ class XmsocialUtility{
 		
 		return $xmsocial_rating;
     }
+	
+	public static function renderVotes($rating = 0, $votes = 0)
+    {
+		$xmsocialHelper = Helper::getHelper('xmsocial');
+		$xmsocialHelper->loadLanguage('main');	
+		$xmsocial_rating = number_format($rating, 1) . ' ';;
+		if ($votes < 2) {
+			$xmsocial_rating .= sprintf(_MA_XMSOCIAL_RATING_VOTE, $votes);
+		} else {		
+			$xmsocial_rating .= sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes);
+		}
+		
+		return $xmsocial_rating;
+    }
 }
