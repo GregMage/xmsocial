@@ -54,9 +54,7 @@ class XmsocialUtility{
 			$xmsocial_rating['size'] = (25 * number_format($rating, 1)) . 'px';
 			$xmsocial_rating['itemid'] = $itemid;
 		}			
-		$xmsocial_rating['rating'] = number_format($rating, 1);
-		$xmsocial_rating['total'] = $stars;
-		$xmsocial_rating['votes'] = sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes);
+		$xmsocial_rating['rating'] = XmsocialUtility::renderVotes($rating, $votes);
 		$xmsocial_rating['options'] = $options;
 		
 		return $xmsocial_rating;

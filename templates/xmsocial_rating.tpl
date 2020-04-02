@@ -10,11 +10,11 @@
 			<{/foreach}>
 		</div>
 		<div>
-			<{$smarty.const._MA_XMSOCIAL_RATING_RATING}>: <{$down_xmsocial.rating}> / <{$down_xmsocial.total}> (<{$down_xmsocial.votes}>)
+			<{$smarty.const._MA_XMSOCIAL_RATING_RATING}>: <{$down_xmsocial.rating}>
 		</div>
 	</div>
 </small>
 <{else}>
 <span class="glyphicon glyphicon-star-empty" title="<{$smarty.const._MA_XMNEWS_NEWS_RATING}>"></span>
-<{$smarty.const._MA_XMSOCIAL_RATING_RATING}>: <{$down_xmsocial.rating}> / <{$down_xmsocial.total}> (<{$down_xmsocial.votes}>)
+<{$smarty.const._MA_XMSOCIAL_RATING_RATING}>: <{$down_xmsocial.rating}>
 <{/if}>
