@@ -68,7 +68,7 @@ class SocialPlugin {
     {
         $language = $GLOBALS['xoopsConfig']['language'];
         if (!file_exists($fileinc = XOOPS_ROOT_PATH . "/modules/xmsocial/plugin/social/language/{$language}/{$social_name}.php")) {
-            if (!file_exists($fileinc = XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/language/english/{$social_name}.php')) {
+            if (!file_exists($fileinc = XOOPS_ROOT_PATH . "/modules/xmsocial/plugin/social/language/english/{$social_name}.php")) {
                 return false;
             }
         }
