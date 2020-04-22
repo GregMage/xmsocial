@@ -41,5 +41,10 @@ use Xmf\Module\Helper;
 			return $obj->getHtmlErrors();
 		}
 	}
+	
+	public static function Url($itemid)
+	{
+		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;
+	}
 	 
  }

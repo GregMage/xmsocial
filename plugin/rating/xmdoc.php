@@ -49,5 +49,10 @@ use Xmf\Module\Helper;
 			return $obj->getHtmlErrors();
 		}
 	}
+	
+	public static function Url($itemid)
+	{
+		return XOOPS_URL . '/modules/xmdoc/admin/document.php?op=edit&document_id=' . $itemid;
+	}
 	 
  }

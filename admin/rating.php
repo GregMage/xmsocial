@@ -34,7 +34,14 @@ switch ($op) {
 		// Get start pager
         $start = Request::getInt('start', 0);
         $xoopsTpl->assign('start', $start);
-        
+		
+		$module_handler = xoops_getHandler('module');
+		$modules_arr = $module_handler->getObjects();
+		$modules = array();		
+		foreach (array_keys($modules_arr) as $i) {
+			$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
+			$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
+		}        
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('rating_date');
@@ -49,10 +56,25 @@ switch ($op) {
             foreach (array_keys($rating_arr) as $i) {
                 $rating['id']          = $rating_arr[$i]->getVar('rating_id');
                 $rating['itemid']      = $rating_arr[$i]->getVar('rating_itemid');
-                $rating['modulename']  = $rating_arr[$i]->getVar('rating_modid') . 'A faire';
+				if (empty($modules[$rating_arr[$i]->getVar('rating_modid')]['name'])){
+					$rating['modulename']  = '/';
+				} else {
+					$rating['modulename']  = $modules[$rating_arr[$i]->getVar('rating_modid')]['name'];
+				}                
                 $rating['value']       = $rating_arr[$i]->getVar('rating_value');
                 $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
                 $rating['hostname']    = $rating_arr[$i]->getVar('rating_hostname');
+                
+				$RatingPlugin = new RatingPlugin();
+				if (empty($modules[$rating_arr[$i]->getVar('rating_modid')]['name'])){
+					$rating['item']   = '';
+				} else {
+					if ($RatingPlugin->CheckPlugin($modules[$rating_arr[$i]->getVar('rating_modid')]['dirname']) == false){
+						$rating['item']   = '';
+					} else {
+						$rating['item']   = $RatingPlugin->Url($modules[$rating_arr[$i]->getVar('rating_modid')]['dirname'], $rating_arr[$i]->getVar('rating_itemid'));
+					}
+				}
                 $rating['date']		   = formatTimestamp($rating_arr[$i]->getVar('rating_date'), 'm');
                 $xoopsTpl->append_by_ref('rating', $rating);
                 unset($rating);

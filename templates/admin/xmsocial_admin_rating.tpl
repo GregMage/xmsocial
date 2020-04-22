@@ -27,8 +27,10 @@
                 <td class="txtcenter"><{$rating.hostname}></td>
                 <td class="txtcenter"><{$rating.modulename}></td>
                 <td class="xo-actions txtcenter">
-					<a class="tooltip" href="" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>">
+					<{if $rating.item != ''}>
+					<a class="tooltip" href="<{$rating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
                         <img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>"></a>
+					<{/if}>
                     <a class="tooltip" href="rating.php?op=del&amp;rating_id=<{$rating.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
                         <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"></a>
                 </td>

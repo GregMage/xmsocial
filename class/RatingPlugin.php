@@ -68,6 +68,15 @@ class RatingPlugin {
 		}
 	}
 	
+	public function Url($rating_name = '', $itemid)
+	{
+		if (in_array($rating_name, $this->ratingNames)) {
+			return basename ('Xmsocial' . $rating_name)::Url($itemid);
+		} else {			
+			return '';
+		}
+	}
+	
 	public function SaveRating($rating_name = '', $itemid, $rating, $vote)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {			
