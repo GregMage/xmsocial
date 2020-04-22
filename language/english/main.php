@@ -22,6 +22,7 @@ define('_MA_XMSOCIAL_SOCIAL_LIST', 'Social media list');
 
 // Error message
 define('_MA_XMSOCIAL_ERROR_NOSOCIAL', 'There are no social media');
+define('_MA_XMSOCIAL_ERROR_NORATING', 'There are no rate');
 
 // Shared
 define('_MA_XMSOCIAL_ADD', 'Add');
@@ -59,6 +60,7 @@ define('_MA_XMSOCIAL_RATING_UID', 'Uname');
 define('_MA_XMSOCIAL_RATING_HOSTNAME', 'Hostname');
 define('_MA_XMSOCIAL_RATING_MODULENAME', 'Module name');
 define('_MA_XMSOCIAL_RATING_VIEW', 'View item');
+define('_MA_XMSOCIAL_RATING_SUREDEL', 'Sure to delete this rate? %s');
 
 // Permission
 define('_MA_XMSOCIAL_PERMISSION_RATING', 'Rating permissions');

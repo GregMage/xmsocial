@@ -51,7 +51,7 @@ switch ($op) {
 		$rating_arr = $ratingHandler->getall($criteria);
         $rating_count = $ratingHandler->getCount($criteria);
         $xoopsTpl->assign('rating_count', $rating_count);
-		$SocialPlugin = new SocialPlugin();
+		$RatingPlugin = new RatingPlugin();
         if ($rating_count > 0) {
             foreach (array_keys($rating_arr) as $i) {
                 $rating['id']          = $rating_arr[$i]->getVar('rating_id');
@@ -64,8 +64,6 @@ switch ($op) {
                 $rating['value']       = $rating_arr[$i]->getVar('rating_value');
                 $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
                 $rating['hostname']    = $rating_arr[$i]->getVar('rating_hostname');
-                
-				$RatingPlugin = new RatingPlugin();
 				if (empty($modules[$rating_arr[$i]->getVar('rating_modid')]['name'])){
 					$rating['item']   = '';
 				} else {
@@ -92,24 +90,42 @@ switch ($op) {
             
     // del
     case 'del':    
-        $social_id = Request::getInt('social_id', 0);
-        if ($social_id == 0) {
-            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NOSOCIAL);
+        $rating_id = Request::getInt('rating_id', 0);
+        if ($rating_id == 0) {
+            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);
         } else {
             $surdel = Request::getBool('surdel', false);
-            $obj  = $socialHandler->get($social_id);
+            $obj  = $ratingHandler->get($rating_id);
             if ($surdel === true) {
                 if (!$GLOBALS['xoopsSecurity']->check()) {
-                    redirect_header('social.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
+                    redirect_header('rating.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
                 }
-                if ($socialHandler->delete($obj)) {
-                    redirect_header('social.php', 2, _MA_XMSOCIAL_REDIRECT_SAVE);
-                } else {
+				//A faire, recalculer les notes
+                //if ($ratingHandler->delete($obj)) {
+                    redirect_header('rating.php', 2, _MA_XMSOCIAL_REDIRECT_SAVE);
+                /*} else {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());
-                }
+                }*/
             } else {
-                xoops_confirm(array('surdel' => true, 'social_id' => $social_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
-                                    sprintf(_MA_XMSOCIAL_SOCIAL_SUREDEL, '<br>' . $obj->getVar('social_name')));
+				$module_handler = xoops_getHandler('module');
+				$modules_arr = $module_handler->getObjects();
+				$modules = array();		
+				foreach (array_keys($modules_arr) as $i) {
+					$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
+					$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
+				}
+				$RatingPlugin = new RatingPlugin();
+				if (empty($modules[$obj->getVar('rating_modid')]['dirname'])){
+					$rating = $obj->getVar('rating_id');
+				} else {
+					if ($RatingPlugin->CheckPlugin($modules[$obj->getVar('rating_modid')]['dirname']) == false){
+						$rating = $obj->getVar('rating_id');
+					} else {
+						$rating = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_id')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $obj->getVar('rating_id') . '</a>';
+					}
+				}				
+                xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+                                    sprintf(_MA_XMSOCIAL_RATING_SUREDEL, '<br>' . $rating));
             }
         }
         
