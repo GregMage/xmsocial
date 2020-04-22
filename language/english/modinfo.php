@@ -27,5 +27,5 @@ define('_MI_XMSOCIAL_MENU_PERMISSION', 'Permissions');
 define('_MI_XMSOCIAL_MENU_ABOUT', 'About');
 
 // Pref
-define('_MI_XMDOC_XMSOCIAL_HEAD_ADMIN', '<span style="font-size: large;  font-weight: bold;">Administration</span>');
-define('_MI_XMDOC_XMSOCIAL_ITEMPERPAGE', 'Number of items per page in the administration view');
+define('_MI_XMSOCIAL_PREF_HEAD_ADMIN', '<span style="font-size: large;  font-weight: bold;">Administration</span>');
+define('_MI_XMSOCIAL_PREF_ITEMPERPAGE', 'Number of items per page in the administration view');
