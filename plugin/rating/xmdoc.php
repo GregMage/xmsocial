@@ -40,14 +40,19 @@ use Xmf\Module\Helper;
 	{
 		$helper = Helper::getHelper('xmdoc');
 		$documentHandler = $helper->getHandler('xmdoc_document');
-		$obj = $documentHandler->get($itemid);
-		$obj->setVar('document_rating', $rating);
-		$obj->setVar('document_votes', $votes);
-		if ($documentHandler->insert($obj)) {
-			return true;
-		} else {
-			return $obj->getHtmlErrors();
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('document_id', $itemid));
+		if ($documentHandler->getcount($criteria) != 0) {
+			$obj = $documentHandler->get($itemid);
+			$obj->setVar('document_rating', $rating);
+			$obj->setVar('document_votes', $votes);
+			if ($documentHandler->insert($obj)) {
+				return true;
+			} else {
+				return $obj->getHtmlErrors();
+			}
 		}
+		return false;
 	}
 	
 	public static function Url($itemid)

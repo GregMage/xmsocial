@@ -32,14 +32,19 @@ use Xmf\Module\Helper;
 	{
 		$helper = Helper::getHelper('xmnews');
 		$newsHandler  = $helper->getHandler('xmnews_news');
-		$obj = $newsHandler->get($itemid);
-		$obj->setVar('news_rating', $rating);
-		$obj->setVar('news_votes', $votes);
-		if ($newsHandler->insert($obj)) {
-			return true;
-		} else {
-			return $obj->getHtmlErrors();
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('news_id', $itemid));
+		if ($newsHandler->getcount($criteria) != 0) {
+			$obj = $newsHandler->get($itemid);
+			$obj->setVar('news_rating', $rating);
+			$obj->setVar('news_votes', $votes);
+			if ($newsHandler->insert($obj)) {
+				return true;
+			} else {
+				return $obj->getHtmlErrors();
+			}
 		}
+		return false;
 	}
 	
 	public static function Url($itemid)

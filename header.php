@@ -21,6 +21,8 @@ $path = dirname(dirname(__DIR__));
 require_once $path . '/mainfile.php';
 include_once __DIR__ . '/include/common.php';
 
+xoops_load('utility', basename(__DIR__));
+
 //xoops_load('utility', basename(__DIR__));
 xoops_load('RatingPlugin', basename(__DIR__));
 

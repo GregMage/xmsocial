@@ -64,19 +64,8 @@ $obj->setVar('rating_value', $rating);
 $obj->setVar('rating_uid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 $obj->setVar('rating_hostname', getenv("REMOTE_ADDR"));
 $obj->setVar('rating_date', time());
-if ($ratingHandler->insert($obj)){
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('rating_itemid', $itemid));
-	$criteria->add(new Criteria('rating_modid', $moduleid));
-	$rating_arr = $ratingHandler->getall($criteria);
-	$votes = 0;
-	$rating = 0;
-	foreach (array_keys($rating_arr) as $i) {
-		$votes++;
-		$rating = $rating + $rating_arr[$i]->getVar('rating_value');
-	}
-	$rating = number_format($rating/$votes);	
-	if ($RatingPlugin->SaveRating($modulename, $itemid, $rating, $votes) == true){
+if ($ratingHandler->insert($obj)){	
+	if (XmsocialUtility::updateRating($modulename, $itemid, $moduleid) == true){
 		redirect_header($redirect_url, 3, _MA_XMSOCIAL_RATE_RATED);
 	} else {
 		redirect_header($redirect_url, 5, _MA_XMSOCIAL_RATE_NOTRATED);

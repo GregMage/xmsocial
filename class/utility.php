@@ -73,4 +73,30 @@ class XmsocialUtility{
 		
 		return $xmsocial_rating;
     }
+	
+	public static function updateRating($modulename, $itemid, $moduleid)
+    {
+		include __DIR__ . '/../include/common.php';
+		$RatingPlugin = new RatingPlugin();
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('rating_itemid', $itemid));
+		$criteria->add(new Criteria('rating_modid', $moduleid));
+		$rating_arr = $ratingHandler->getall($criteria);
+		$votes = 0;
+		$rating = 0;
+		foreach (array_keys($rating_arr) as $i) {
+			$votes++;
+			$rating = $rating + $rating_arr[$i]->getVar('rating_value');
+		}
+		if ($votes != 0) {
+			$rating = number_format($rating/$votes);
+		} else {
+			$rating = 0;
+		}
+		if ($RatingPlugin->SaveRating($modulename, $itemid, $rating, $votes) == true){
+			return true;
+		} else {
+			return false;
+		}
+    }
 }

@@ -18,7 +18,7 @@
  */
 use Xmf\Module\Admin;
 use Xmf\Request;
-
+use Xmf\Module\Helper;
 
 require __DIR__ . '/admin_header.php';
 $moduleAdmin = Admin::getInstance();
@@ -90,7 +90,7 @@ switch ($op) {
             
     // del
     case 'del':    
-        $rating_id = Request::getInt('rating_id', 0);
+        $rating_id = Request::getInt('rating_id', 0);		
         if ($rating_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);
         } else {
@@ -100,12 +100,20 @@ switch ($op) {
                 if (!$GLOBALS['xoopsSecurity']->check()) {
                     redirect_header('rating.php', 3, implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()));
                 }
-				//A faire, recalculer les notes
-                //if ($ratingHandler->delete($obj)) {
-                    redirect_header('rating.php', 2, _MA_XMSOCIAL_REDIRECT_SAVE);
-                /*} else {
+                if ($ratingHandler->delete($obj)) {
+					$modulename = Request::getString('mod', '');
+					$itemid = Request::getInt('itemid', 0);
+					if ($modulename == '' || $itemid == 0){
+						redirect_header('rating.php', 2, _MA_XMSOCIAL_REDIRECT_SAVE);
+					} else {
+						$helper = Helper::getHelper($modulename);
+						$moduleid = $helper->getModule()->getVar('mid');
+						XmsocialUtility::updateRating($modulename, $itemid, $moduleid);
+						redirect_header('rating.php', 2, _MA_XMSOCIAL_REDIRECT_SAVE);
+					}
+                } else {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());
-                }*/
+                }
             } else {
 				$module_handler = xoops_getHandler('module');
 				$modules_arr = $module_handler->getObjects();
@@ -116,16 +124,19 @@ switch ($op) {
 				}
 				$RatingPlugin = new RatingPlugin();
 				if (empty($modules[$obj->getVar('rating_modid')]['dirname'])){
-					$rating = $obj->getVar('rating_id');
+					$itemidString = $obj->getVar('rating_itemid');
+					$modulename = '';
 				} else {
 					if ($RatingPlugin->CheckPlugin($modules[$obj->getVar('rating_modid')]['dirname']) == false){
-						$rating = $obj->getVar('rating_id');
+						$itemidString = $obj->getVar('rating_itemid');
+						$modulename = '';
 					} else {
-						$rating = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_id')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $obj->getVar('rating_id') . '</a>';
+						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $obj->getVar('rating_itemid') . '</a>';
+						$modulename = $modules[$obj->getVar('rating_modid')]['dirname'];
 					}
-				}				
-                xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
-                                    sprintf(_MA_XMSOCIAL_RATING_SUREDEL, '<br>' . $rating));
+				}			
+                xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del', 'mod' => $modulename, 'itemid' => $obj->getVar('rating_itemid')), $_SERVER['REQUEST_URI'], 
+                                    sprintf(_MA_XMSOCIAL_RATING_SUREDEL, '<br>' . $itemidString));
             }
         }
         
