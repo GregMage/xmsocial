@@ -35,23 +35,47 @@ switch ($op) {
         $start = Request::getInt('start', 0);
         $xoopsTpl->assign('start', $start);
 		
+		
+		$uname = Request::getInt('uname', -1);
+		// Criteria
+        $criteria = new CriteriaCompo();
+		$rating_arr = $ratingHandler->getall($criteria);
+		if (count($rating_arr) > 0) {
+			foreach (array_keys($rating_arr) as $i) {
+				$uname_arr[$rating_arr[$i]->getVar('rating_uid')] = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
+			}
+		}
+		asort($uname_arr);
+		if (count($uname_arr) > 0) {
+			$uname_options = '<option value="-1"' . ($uname == -1 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+			foreach (array_keys($uname_arr) as $i) {
+				$uname_options .= '<option value="' . $i . '"' . ($uname == $i ? ' selected="selected"' : '') . '>' . $uname_arr[$i] . '</option>';
+			}				
+			$xoopsTpl->assign('uname_options', $uname_options);
+		}
+		
 		$module_handler = xoops_getHandler('module');
 		$modules_arr = $module_handler->getObjects();
 		$modules = array();		
 		foreach (array_keys($modules_arr) as $i) {
 			$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
 			$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
-		}        
+		}
+		$xoopsTpl->assign('filter', true);
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('rating_date');
         $criteria->setOrder('DESC');
         $criteria->setStart($start);
         $criteria->setLimit($nb_limit);
+		if ($uname != -1){
+			$criteria->add(new Criteria('rating_uid', $uname));
+		}
 		$rating_arr = $ratingHandler->getall($criteria);
         $rating_count = $ratingHandler->getCount($criteria);
         $xoopsTpl->assign('rating_count', $rating_count);
 		$RatingPlugin = new RatingPlugin();
+		$uname_arr = array();
         if ($rating_count > 0) {
             foreach (array_keys($rating_arr) as $i) {
                 $rating['id']          = $rating_arr[$i]->getVar('rating_id');
@@ -62,7 +86,7 @@ switch ($op) {
 					$rating['modulename']  = $modules[$rating_arr[$i]->getVar('rating_modid')]['name'];
 				}                
                 $rating['value']       = $rating_arr[$i]->getVar('rating_value');
-                $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
+                $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));				
                 $rating['hostname']    = $rating_arr[$i]->getVar('rating_hostname');
 				if (empty($modules[$rating_arr[$i]->getVar('rating_modid')]['name'])){
 					$rating['item']   = '';
@@ -82,6 +106,7 @@ switch ($op) {
                 $nav = new XoopsPageNav($rating_count, $nb_limit, $start, 'start');
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
+			
         } else {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);        
 		}
