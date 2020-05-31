@@ -39,8 +39,12 @@ class RatingPlugin {
 	
 	public function CheckPlugin($rating_name = '')
 	{
-		if (in_array($rating_name, $this->ratingNames)) {			
-			return true;
+		if (in_array($rating_name, $this->ratingNames)) {
+			if (xoops_isActiveModule($rating_name)){
+				return true;
+			} else {
+				return false;
+			}		
 		} else {			
 			return false;
 		}
