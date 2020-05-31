@@ -83,20 +83,20 @@ switch ($op) {
 				}				
 				$xoopsTpl->assign('module_options', $module_options);
 			}
-			// filtre module
+			// filtre item
 			if ($module != 0){
 				if (count($item_temp_arr) > 0) {
 					$item_temp_arr = array_unique($item_temp_arr);
 					if ($RatingPlugin->CheckPlugin($modules[$module]['dirname']) == true){
 						$item_arr = $RatingPlugin->ItemNames($modules[$module]['dirname'], $item_temp_arr);
-						$item_options = '<option value="0"' . ($module == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
+						$item_options = '<option value="0"' . ($item == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
 						foreach (array_keys($item_arr) as $i) {
 							if (strlen($item_arr[$i]) > 30){
 								$item_name = substr($item_arr[$i],0 , 30) . '...';
 							} else {
 								$item_name = $item_arr[$i];
 							}	
-							$item_options .= '<option value="' . $i . '"' . ($module == $i ? ' selected="selected"' : '') . '>' . $item_name . '</option>';
+							$item_options .= '<option value="' . $i . '"' . ($item == $i ? ' selected="selected"' : '') . '>' . $item_name . '</option>';
 						}				
 						$xoopsTpl->assign('item_options', $item_options);
 						$xoopsTpl->assign('view_item', true);
@@ -154,10 +154,9 @@ switch ($op) {
             }
             // Display Page Navigation
             if ($rating_count > $nb_limit) {
-                $nav = new XoopsPageNav($rating_count, $nb_limit, $start, 'start');
+                $nav = new XoopsPageNav($rating_count, $nb_limit, $start, 'start', 'module=' . $module . '&item=' . $item . '&uname=' . $uname);
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
-			
         } else {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);        
 		}
