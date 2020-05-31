@@ -51,5 +51,24 @@ use Xmf\Module\Helper;
 	{
 		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;
 	}
+	
+	public static function ItemNames($itemids)
+	{
+		$helper = Helper::getHelper('xmnews');
+		$newsHandler  = $helper->getHandler('xmnews_news');
+		$criteria = new CriteriaCompo();
+		$criteria->setSort('news_title');
+		$criteria->setOrder('ASC');
+		$criteria->add(new Criteria('news_id', '(' . implode(',', $itemids) . ')', 'IN'));
+		$news_arr = $newsHandler->getall($criteria);
+		if (count($news_arr) > 0){
+			foreach (array_keys($news_arr) as $i) {
+				$item_arr[$i] = $news_arr[$i]->getVar('news_title');
+			}
+			return $item_arr;
+		} else {
+			return array();
+		}
+	}
 	 
  }

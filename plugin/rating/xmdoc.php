@@ -59,5 +59,24 @@ use Xmf\Module\Helper;
 	{
 		return XOOPS_URL . '/modules/xmdoc/admin/document.php?op=edit&document_id=' . $itemid;
 	}
+	
+	public static function ItemNames($itemids)
+	{
+		$helper = Helper::getHelper('xmdoc');
+		$documentHandler = $helper->getHandler('xmdoc_document');
+		$criteria = new CriteriaCompo();
+		$criteria->setSort('document_weight ASC, document_name');
+		$criteria->setOrder('ASC');
+		$criteria->add(new Criteria('document_id', '(' . implode(',', $itemids) . ')', 'IN'));
+		$document_arr = $documentHandler->getall($criteria);
+		if (count($document_arr) > 0){
+			foreach (array_keys($document_arr) as $i) {
+				$item_arr[$i] = $document_arr[$i]->getVar('document_name');
+			}
+			return $item_arr;
+		} else {
+			return array();
+		}
+	}
 	 
  }

@@ -10,13 +10,19 @@
 	<div align="right">
 		<form id="form_rating_tri" name="form_rating_tri" method="get" action="rating.php">
 			<{$smarty.const._MA_XMSOCIAL_RATING_UID}>
-			<select name="rating_uname" id="rating_uname" onchange="location='rating.php?uname=<{$uname}>&uname='+this.options[this.selectedIndex].value">
+			<select name="rating_uname" id="rating_uname" onchange="location='rating.php?module=<{$module}>&item=<{$item}>&uname='+this.options[this.selectedIndex].value">
 				<{$uname_options}>
 			<select>
-			<{$smarty.const._MA_XMNEWS_STATUS}>
-			<select name="news_filter" id="news_filter" onchange="location='news.php?news_cid=<{$news_cid}>&news_status='+this.options[this.selectedIndex].value">
-				<{$news_status_options}>
+			<{$smarty.const._MA_XMSOCIAL_RATING_MODULENAME}>
+			<select name="rating_module" id="rating_module" onchange="location='rating.php?uname=<{$uname}>&item=<{$item}>&module='+this.options[this.selectedIndex].value">
+				<{$module_options}>
 			<select>
+			<{if $view_item}>
+			<{$smarty.const._MA_XMSOCIAL_RATING_TITLE}>
+			<select name="rating_item" id="rating_item" onchange="location='rating.php?uname=<{$uname}>&module=<{$module}>&item='+this.options[this.selectedIndex].value">
+				<{$item_options}>
+			<select>
+			<{/if}>
 		</form>
 	</div>
 <{/if}>
@@ -29,7 +35,9 @@
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_UID}></th>         
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_HOSTNAME}></th>
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENAME}></th>
-            <th class="txtleft"><{$smarty.const._MA_XMSOCIAL_RATING_TITLE}></th>
+			<{if $view_item}>
+				<th class="txtleft"><{$smarty.const._MA_XMSOCIAL_RATING_TITLE}></th>
+			<{/if}>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_ACTION}></th>
         </tr>
         </thead>
@@ -41,7 +49,9 @@
                 <td class="txtcenter"><{$rating.uid}></td>
                 <td class="txtcenter"><{$rating.hostname}></td>
                 <td class="txtcenter"><{$rating.modulename}></td>
-                <td class="txtleft"><{$rating.title}></td>
+				<{if $view_item}>
+					<td class="txtleft"><{$rating.title}></td>
+				<{/if}>
                 <td class="xo-actions txtcenter">
 					<{if $rating.item != ''}>
 					<a class="tooltip" href="<{$rating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
