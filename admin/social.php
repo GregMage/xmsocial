@@ -52,7 +52,7 @@ switch ($op) {
             foreach (array_keys($social_arr) as $i) {
                 $social['id']          = $social_arr[$i]->getVar('social_id');
 				$options = explode(',', $social_arr[$i]->getVar('social_options'));
-                $social['render']      = $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $options);
+                $social['render']      = $SocialPlugin->render($social_arr[$i]->getVar('social_type'), '', $options);
                 $social['name']        = $social_arr[$i]->getVar('social_name');
                 $social['type']        = $social_arr[$i]->getVar('social_type');
                 $social['weight']      = $social_arr[$i]->getVar('social_weight');

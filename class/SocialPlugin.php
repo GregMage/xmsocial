@@ -55,10 +55,10 @@ class SocialPlugin {
 		}
 	}
 	
-	public function render($social_name = '', $options = array())
+	public function render($social_name = '', $url = '', $options = array())
 	{		
 		if (in_array($social_name, $this->socialNames)) {			
-			return basename ('Xmsocial' . $social_name)::render('', $options);
+			return basename ('Xmsocial' . $social_name)::render($url, $options);
 		} else {			
 			return '';
 		}
