@@ -8,7 +8,7 @@
 <{/if}>
 <{if $filter}>
 	<div align="right">
-		<form id="form_rating_tri" name="form_rating_tri" method="get" action="rating.php">
+		<form id="form_rating_tri" name="form_rating_tri" method="post" action="rating.php">
 			<{$smarty.const._MA_XMSOCIAL_RATING_UID}>
 			<select name="rating_uname" id="rating_uname" onchange="location='rating.php?module=<{$module}>&item=<{$item}>&uname='+this.options[this.selectedIndex].value">
 				<{$uname_options}>
@@ -23,6 +23,7 @@
 				<{$item_options}>
 			<select>
 			<{/if}>
+			<input type='button' name='reset'  id='reset' value='<{$smarty.const._RESET}>' onclick="location='rating.php'" />
 		</form>
 	</div>
 <{/if}>
