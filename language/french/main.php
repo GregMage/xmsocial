@@ -59,6 +59,7 @@ define('_MA_XMSOCIAL_RATING_VALUE', 'Valeur');
 define('_MA_XMSOCIAL_RATING_UID', 'Nom');
 define('_MA_XMSOCIAL_RATING_HOSTNAME', 'Nom d\'hôte');
 define('_MA_XMSOCIAL_RATING_MODULENAME', 'Nom du module');
+define('_MA_XMSOCIAL_RATING_MODULENOACTIVE', ' - Module inactif!');
 define('_MA_XMSOCIAL_RATING_VIEW', 'Regarder l\'objet');
 define('_MA_XMSOCIAL_RATING_SUREDEL', 'Voulez-vous vraiment supprimer cette évaluation? %s');
 define('_MA_XMSOCIAL_RATING_TITLE', 'Objet');

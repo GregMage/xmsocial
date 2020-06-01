@@ -44,6 +44,7 @@ switch ($op) {
 		foreach (array_keys($modules_arr) as $i) {
 			$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
 			$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
+			$modules[$modules_arr[$i]->getVar('mid')]['isactive'] = $modules_arr[$i]->getVar('isactive');
 		}
 		// filtres
 		$xoopsTpl->assign('filter', true);
@@ -132,6 +133,7 @@ switch ($op) {
 					$rating['modulename']  = '/';
 				} else {
 					$rating['modulename']  = $modules[$rating_arr[$i]->getVar('rating_modid')]['name'];
+					$rating['isactive']    = $modules[$rating_arr[$i]->getVar('rating_modid')]['isactive'];
 				}                
                 $rating['value']       = $rating_arr[$i]->getVar('rating_value');
                 $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));				
@@ -206,7 +208,8 @@ switch ($op) {
 						$itemidString = $obj->getVar('rating_itemid');
 						$modulename = '';
 					} else {
-						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $obj->getVar('rating_itemid') . '</a>';
+						$item_name = $RatingPlugin->ItemNames($modules[$obj->getVar('rating_modid')]['dirname'], array($obj->getVar('rating_itemid')));
+						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $item_name[$obj->getVar('rating_itemid')] . '</a>';
 						$modulename = $modules[$obj->getVar('rating_modid')]['dirname'];
 					}
 				}			

@@ -59,6 +59,7 @@ define('_MA_XMSOCIAL_RATING_VALUE', 'Value');
 define('_MA_XMSOCIAL_RATING_UID', 'Uname');
 define('_MA_XMSOCIAL_RATING_HOSTNAME', 'Hostname');
 define('_MA_XMSOCIAL_RATING_MODULENAME', 'Module name');
+define('_MA_XMSOCIAL_RATING_MODULENOACTIVE', ' - Inactive module!');
 define('_MA_XMSOCIAL_RATING_VIEW', 'View item');
 define('_MA_XMSOCIAL_RATING_SUREDEL', 'Sure to delete this rate? %s');
 define('_MA_XMSOCIAL_RATING_TITLE', 'Item');

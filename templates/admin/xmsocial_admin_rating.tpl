@@ -49,7 +49,13 @@
                 <td class="txtcenter"><{$rating.value}></td>
                 <td class="txtcenter"><{$rating.uid}></td>
                 <td class="txtcenter"><{$rating.hostname}></td>
-                <td class="txtcenter"><{$rating.modulename}></td>
+                <td class="txtcenter">
+					<{$rating.modulename}>
+					<{if $rating.isactive == 0}>
+						<span style="color:red; font-weight:bold;"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENOACTIVE}></span>
+					<{/if}>
+					
+				</td>
 				<{if $view_item}>
 					<td class="txtleft"><{$rating.title}></td>
 				<{/if}>
