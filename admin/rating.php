@@ -216,10 +216,45 @@ switch ($op) {
                 xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del', 'mod' => $modulename, 'itemid' => $obj->getVar('rating_itemid')), $_SERVER['REQUEST_URI'], 
                                     sprintf(_MA_XMSOCIAL_RATING_SUREDEL, '<br>' . $itemidString));
             }
-        }
-        
+        }        
         break;
-        
+
+	// purgel
+    case 'purge':
+		if (isset($_POST['ratinglist_id'])) {
+			$criteria = new CriteriaCompo();
+			$ratinglist_count = (!empty($_POST['ratinglist_id']) && is_array($_POST['ratinglist_id'])) ? count($_POST['ratinglist_id']) : 0;
+			if ($ratinglist_count > 0) {
+				$module_handler = xoops_getHandler('module');
+				$modules_arr = $module_handler->getObjects();
+				$modules = array();		
+				foreach (array_keys($modules_arr) as $i) {
+					$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
+					$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
+				}
+				$RatingPlugin = new RatingPlugin();				
+				$error_message = '';
+				for ($i = 0; $i < $ratinglist_count; ++$i) {										
+					$obj  = $ratingHandler->get($_REQUEST['ratinglist_id'][$i]);
+					$itemid = $obj->getVar('rating_itemid');
+					$modid = $obj->getVar('rating_modid');
+					$modulename = $modules[$modid]['dirname'];
+					if ($ratingHandler->delete($obj)) {						
+						if ($modulename != ''){
+							XmsocialUtility::updateRating($modulename, $itemid, $modid);
+						}
+					} else {
+						$error_message .= $obj->getHtmlErrors();
+					}
+				}
+			}
+			if ($error_message == '') {
+				redirect_header('rating.php', 3, _MA_XMSOCIAL_REDIRECT_SAVE);
+			} else {
+				$xoopsTpl->assign('error_message', $obj->getHtmlErrors());
+			}
+        }
+        break;
     }
 
 $xoopsTpl->display("db:xmsocial_admin_rating.tpl");

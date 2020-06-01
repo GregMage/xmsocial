@@ -31,6 +31,7 @@
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>
+			<th class="txtcenter width5"><input name='allbox' id='allbox' onclick='xoopsCheckAll("ratinglist", "allbox");' type='checkbox' value='Check All'/></th>
             <th class="txtleft width10"><{$smarty.const._MA_XMSOCIAL_RATING_DATE}></th>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_RATING_VALUE}></th>
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_UID}></th>         
@@ -42,34 +43,40 @@
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_ACTION}></th>
         </tr>
         </thead>
-        <tbody>
-        <{foreach item=rating from=$rating}>
-            <tr class="<{cycle values='even,odd'}> alignmiddle">
-                <td class="txtleft"><{$rating.date}></td>
-                <td class="txtcenter"><{$rating.value}></td>
-                <td class="txtcenter"><{$rating.uid}></td>
-                <td class="txtcenter"><{$rating.hostname}></td>
-                <td class="txtcenter">
-					<{$rating.modulename}>
-					<{if $rating.isactive == 0}>
-						<span style="color:red; font-weight:bold;"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENOACTIVE}></span>
+		<form name='ratinglist' id='commentslist' action='rating.php?op=purge' method="post">
+			<tbody>
+			<{foreach item=rating from=$rating}>
+				<tr class="<{cycle values='even,odd'}> alignmiddle">
+					<td class="txtcenter"><input type='checkbox' name='ratinglist_id[]' id='ratinglist_id[]' value='<{$rating.id}>'/></td>
+					<td class="txtleft"><{$rating.date}></td>
+					<td class="txtcenter"><{$rating.value}></td>
+					<td class="txtcenter"><{$rating.uid}></td>
+					<td class="txtcenter"><{$rating.hostname}></td>
+					<td class="txtcenter">
+						<{$rating.modulename}>
+						<{if $rating.isactive == 0}>
+							<span style="color:red; font-weight:bold;"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENOACTIVE}></span>
+						<{/if}>
+						
+					</td>
+					<{if $view_item}>
+						<td class="txtleft"><{$rating.title}></td>
 					<{/if}>
-					
-				</td>
-				<{if $view_item}>
-					<td class="txtleft"><{$rating.title}></td>
-				<{/if}>
-                <td class="xo-actions txtcenter">
-					<{if $rating.item != ''}>
-					<a class="tooltip" href="<{$rating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
-                        <img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>"></a>
-					<{/if}>
-                    <a class="tooltip" href="rating.php?op=del&amp;rating_id=<{$rating.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
-                        <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"></a>
-                </td>
+					<td class="xo-actions txtcenter">
+						<{if $rating.item != ''}>
+						<a class="tooltip" href="<{$rating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
+							<img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>"></a>
+						<{/if}>
+						<a class="tooltip" href="rating.php?op=del&amp;rating_id=<{$rating.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
+							<img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"></a>
+					</td>
+				</tr>
+			<{/foreach}>
+            <tr>
+                <td class="txtcenter"><input type='submit' name='<{$smarty.const._DELETE}>' value='<{$smarty.const._DELETE}>'/></td>
             </tr>
-        <{/foreach}>
-        </tbody>
+			</tbody>			
+		</form>
     </table>
     <div class="clear spacer"></div>
     <{if $nav_menu}>
