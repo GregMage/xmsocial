@@ -23,4 +23,5 @@ $helper = Helper::getHelper(basename(dirname(__DIR__)));
 // Get handler
 $socialHandler = $helper->getHandler('xmsocial_social');
 $ratingHandler = $helper->getHandler('xmsocial_rating');
+$socialdataHandler = $helper->getHandler('xmsocial_socialdata');
 

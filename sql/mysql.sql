@@ -20,3 +20,15 @@ CREATE TABLE `xmsocial_rating` (
   
   PRIMARY KEY (`rating_id`)
 ) ENGINE=MyISAM;
+
+CREATE TABLE `xmsocial_socialdata` (
+  `socialdata_id`             mediumint(8) unsigned    NOT NULL AUTO_INCREMENT,
+  `socialdata_socialid`       mediumint(8) unsigned    NOT NULL DEFAULT '0',
+  `socialdata_modid`          smallint(5)  unsigned    NOT NULL DEFAULT '0',
+  `socialdata_itemid`         mediumint(8) unsigned    NOT NULL DEFAULT '0',
+  
+  PRIMARY KEY (`socialdata_id`),
+  KEY `socialdata_socialid` (`socialdata_socialid`),
+  KEY `socialdata_modid` (`socialdata_modid`),
+  KEY `socialdata_itemid` (`socialdata_itemid`)
+) ENGINE=MyISAM;
