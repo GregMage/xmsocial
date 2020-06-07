@@ -47,7 +47,6 @@ switch ($op) {
 			$modules[$modules_arr[$i]->getVar('mid')]['isactive'] = $modules_arr[$i]->getVar('isactive');
 		}
 		// filtres
-		$xoopsTpl->assign('filter', true);
 		$uname  = Request::getInt('uname', -1);
 		$module = Request::getInt('module', 0);
 		$item   = Request::getInt('item', 0);
@@ -58,6 +57,7 @@ switch ($op) {
         $criteria = new CriteriaCompo();
 		$rating_arr = $ratingHandler->getall($criteria);
 		if (count($rating_arr) > 0) {
+			$xoopsTpl->assign('filter', true);
 			foreach (array_keys($rating_arr) as $i) {
 				$uname_arr[$rating_arr[$i]->getVar('rating_uid')] = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
 				$module_arr[$rating_arr[$i]->getVar('rating_modid')] = $modules[$rating_arr[$i]->getVar('rating_modid')]['name'];

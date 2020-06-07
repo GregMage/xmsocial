@@ -48,6 +48,7 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 
 $modversion['tables'][1] = 'xmsocial_social';
 $modversion['tables'][2] = 'xmsocial_rating';
+$modversion['tables'][3] = 'xmsocial_socialdata';
 
 
 // Admin Templates
