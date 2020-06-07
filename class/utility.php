@@ -113,4 +113,106 @@ class XmsocialUtility{
 		$error_message = $ratingHandler->deleteAll($criteria);
         return $error_message;
     }
+	
+    public static function renderSocialForm($form, $modulename = '', $itemid = 0)
+    {
+        include __DIR__ . '/../include/common.php';
+		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
+		// module id
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		// Criteria
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('socialdata_modid', $moduleid));
+		$criteria->add(new Criteria('socialdata_itemid', $itemid));
+		$socialdata_arr = $socialdataHandler->getall($criteria);
+		if (count($socialdata_arr) > 0) {
+			foreach (array_keys($socialdata_arr) as $i) {
+				$value[] = $socialdata_arr[$i]->getVar('socialdata_socialid');
+			}
+		} else {
+			$value = array();
+		}	
+		// Criteria
+        $criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('social_status', 1));	
+        $criteria->setSort('social_weight ASC, social_name');
+        $criteria->setOrder('ASC');
+		$social_arr = $socialHandler->getall($criteria);
+		if (count($social_arr) > 0) {
+			$SocialPlugin = new SocialPlugin();
+			$social = new XoopsFormCheckBox('nom', 'socials', $value);
+			$social->columns = 3;
+			foreach (array_keys($social_arr) as $i) {
+				$options = explode(',', $social_arr[$i]->getVar('social_options'));
+				$social->addOption($i, $SocialPlugin->render($social_arr[$i]->getVar('social_type'), '', $options));
+			}
+			$form->addElement($social, false);
+		}
+		return $form;
+    }
+
+	public static function saveSocial($modulename = '', $itemid = 0)
+    {
+        include __DIR__ . '/../include/common.php';
+		$error_message = '';
+		// module id
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		if (isset($_REQUEST['socials'])) {
+			// Criteria
+			$criteria = new CriteriaCompo();
+			$social_arr = $socialHandler->getall($criteria);
+			if (count($social_arr) > 0 && isset($_REQUEST['socials'])) {
+				foreach (array_keys($social_arr) as $i) {
+					if (in_array($i, $_REQUEST['socials'])) {
+						// vérification pour savoir si le media social est déjà existant et création de l'entrée si pas existant
+						$criteria = new CriteriaCompo();
+						$criteria->add(new Criteria('socialdata_socialid', $i));
+						$criteria->add(new Criteria('socialdata_modid', $moduleid));
+						$criteria->add(new Criteria('socialdata_itemid', $itemid));
+						$socialdata_count = $socialdataHandler->getCount($criteria);
+						if ($socialdata_count == 0) {
+							$obj  = $socialdataHandler->create();
+							$obj->setVar('socialdata_socialid', $i);
+							$obj->setVar('socialdata_modid', $moduleid);
+							$obj->setVar('socialdata_itemid', $itemid);					
+							if ($socialdataHandler->insert($obj)){
+								$error_message .= '';
+							} else {
+								$error_message .= 'socialdata socialid: ' . $i . '<br>' . $obj->getHtmlErrors();
+							}
+						}
+					} else {
+						// Suppression du media social si il est existant
+						$criteria = new CriteriaCompo();
+						$criteria->add(new Criteria('socialdata_socialid', $i));
+						$criteria->add(new Criteria('socialdata_modid', $moduleid));
+						$criteria->add(new Criteria('socialdata_itemid', $itemid));
+						$socialdataHandler->deleteAll($criteria);
+					}
+				}
+			}
+		} else {
+			$criteria = new CriteriaCompo();
+			$criteria->add(new Criteria('socialdata_modid', $moduleid));
+			$criteria->add(new Criteria('socialdata_itemid', $itemid));			
+			$socialdataHandler->deleteAll($criteria);
+		}
+        return $error_message;
+    }
+	
+	public static function delSocialdata($modulename = '', $itemid = 0)
+    {
+        include __DIR__ . '/../include/common.php';
+		$error_message = '';
+		
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('socialdata_modid', $moduleid));
+		$criteria->add(new Criteria('socialdata_itemid', $itemid));
+		$error_message = $socialdataHandler->deleteAll($criteria);
+        return $error_message;
+    }
 }
