@@ -43,6 +43,7 @@ define('_MA_XMSOCIAL_SOCIAL_RENDER', 'Render');
 define('_MA_XMSOCIAL_SOCIAL_SUREDEL', 'Sure to delete this social media? %s');
 define('_MA_XMSOCIAL_SOCIAL_TYPE', 'Type of social media');
 define('_MA_XMSOCIAL_SOCIAL_WEIGHT', 'Weight');
+define('_MA_XMSOCIAL_SOCIAL_FORM', 'Choice of sharing links (social media) to display');
 
 // Rating
 define('_MA_XMSOCIAL_RATING_RATING', 'Rating');

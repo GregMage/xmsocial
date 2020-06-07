@@ -118,6 +118,8 @@ class XmsocialUtility{
     {
         include __DIR__ . '/../include/common.php';
 		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
+		$xmsocialHelper = Helper::getHelper('xmsocial');
+		$xmsocialHelper->loadLanguage('main');
 		// module id
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
@@ -141,7 +143,7 @@ class XmsocialUtility{
 		$social_arr = $socialHandler->getall($criteria);
 		if (count($social_arr) > 0) {
 			$SocialPlugin = new SocialPlugin();
-			$social = new XoopsFormCheckBox('nom', 'socials', $value);
+			$social = new XoopsFormCheckBox(_MA_XMSOCIAL_SOCIAL_FORM, 'socials', $value);
 			$social->columns = 3;
 			foreach (array_keys($social_arr) as $i) {
 				$options = explode(',', $social_arr[$i]->getVar('social_options'));
