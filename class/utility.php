@@ -99,4 +99,18 @@ class XmsocialUtility{
 			return false;
 		}
     }
+	
+	public static function delRatingdata($modulename = '', $itemid = 0)
+    {
+        include __DIR__ . '/../include/common.php';
+		$error_message = '';
+		
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('rating_modid', $moduleid));
+		$criteria->add(new Criteria('rating_itemid', $itemid));
+		$error_message = $ratingHandler->deleteAll($criteria);
+        return $error_message;
+    }
 }
