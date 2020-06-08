@@ -162,12 +162,17 @@ class XmsocialUtility{
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		if (isset($_REQUEST['socials'])) {
+			if (is_array($_REQUEST['socials']) == true){
+				$socials = $_REQUEST['socials'];
+			} else {
+				$socials[] = $_REQUEST['socials'];
+			}
 			// Criteria
 			$criteria = new CriteriaCompo();
 			$social_arr = $socialHandler->getall($criteria);
-			if (count($social_arr) > 0 && isset($_REQUEST['socials'])) {
+			if (count($social_arr) > 0) {
 				foreach (array_keys($social_arr) as $i) {
-					if (in_array($i, $_REQUEST['socials'])) {
+					if (in_array($i, $socials)) {
 						// vérification pour savoir si le media social est déjà existant et création de l'entrée si pas existant
 						$criteria = new CriteriaCompo();
 						$criteria->add(new Criteria('socialdata_socialid', $i));
