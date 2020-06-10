@@ -142,9 +142,10 @@ class xmsocial_social extends XoopsObject
 			$options = array();
 		} else {
 			$options = explode(',', $this->getVar('social_options'));
-		}		
-		$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_OPTIONS, $SocialPlugin->getOptionsEdit($social_type, $options)));
-		$form->addElement(new XoopsFormHidden('social_options', 'A faire'));
+		}
+		if ($SocialPlugin->getOptionsEdit($social_type, $options) != ''){
+			$form->addElement(new xoopsFormLabel(_MA_XMSOCIAL_SOCIAL_OPTIONS, $SocialPlugin->getOptionsEdit($social_type, $options)));
+		}
 
         // weight
         $form->addElement(new XoopsFormText(_MA_XMSOCIAL_SOCIAL_WEIGHT, 'social_weight', 5, 5, $this->getVar('social_weight')));
