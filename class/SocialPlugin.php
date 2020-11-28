@@ -36,7 +36,7 @@ class SocialPlugin {
 		return $this->socialNames;
 	}
 	
-	public function getOptionsEdit($social_name = '', $options)
+	public function getOptionsEdit($social_name = '', $options = array())
 	{
 		$this->loadLanguage($social_name);
 		if (in_array($social_name, $this->socialNames)) {			
