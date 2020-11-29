@@ -5,17 +5,20 @@
 <div>
     <{$renderbutton}>
 </div>
-<{if $error_message != ''}>
+<{if $error_message|default:'' != ''}>
     <div class="errorMsg" style="text-align: left;">
         <{$error_message}>
     </div>
 <{/if}>
-<{if $form}>
+<{if $form|default:false}>
     <div>
         <{$form}>
     </div>
 <{/if}>
-<{if $social_count != 0}>
+<div class="xm-warning-msg" style="text-align: center;">
+	<{$smarty.const._MA_XMSOCIAL_WARNING_TRACKER}>
+</div>
+<{if $social_count|default:0 != 0}>
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>
@@ -53,7 +56,7 @@
         </tbody>
     </table>
     <div class="clear spacer"></div>
-    <{if $nav_menu}>
+    <{if $nav_menu|default:false}>
         <div class="floatright"><{$nav_menu}></div>
         <div class="clear spacer"></div>
     <{/if}>

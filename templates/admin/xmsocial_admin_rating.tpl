@@ -1,12 +1,10 @@
-<div>
-    <{$renderbutton}>
-</div>
-<{if $error_message != ''}>
+
+<{if $error_message|default:'' != ''}>
     <div class="errorMsg" style="text-align: left;">
         <{$error_message}>
     </div>
 <{/if}>
-<{if $filter}>
+<{if $filter|default:false}>
 	<div align="right">
 		<form id="form_rating_tri" name="form_rating_tri" method="post" action="rating.php">
 			<{$smarty.const._MA_XMSOCIAL_RATING_UID}>
@@ -17,7 +15,7 @@
 			<select name="rating_module" id="rating_module" onchange="location='rating.php?uname=<{$uname}>&item=<{$item}>&module='+this.options[this.selectedIndex].value">
 				<{$module_options}>
 			<select>
-			<{if $view_item}>
+			<{if $view_item|default:false}>
 			<{$smarty.const._MA_XMSOCIAL_RATING_TITLE}>
 			<select name="rating_item" id="rating_item" onchange="location='rating.php?uname=<{$uname}>&module=<{$module}>&item='+this.options[this.selectedIndex].value">
 				<{$item_options}>
@@ -27,7 +25,7 @@
 		</form>
 	</div>
 <{/if}>
-<{if $rating_count != 0}>
+<{if $rating_count|default:0 != 0}>
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>
@@ -37,7 +35,7 @@
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_UID}></th>         
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_HOSTNAME}></th>
             <th class="txtcenter width15"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENAME}></th>
-			<{if $view_item}>
+			<{if $view_item|default:false}>
 				<th class="txtleft"><{$smarty.const._MA_XMSOCIAL_RATING_TITLE}></th>
 			<{/if}>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_ACTION}></th>
@@ -59,7 +57,7 @@
 						<{/if}>
 						
 					</td>
-					<{if $view_item}>
+					<{if $view_item|default:false}>
 						<td class="txtleft"><{$rating.title}></td>
 					<{/if}>
 					<td class="xo-actions txtcenter">
@@ -79,7 +77,7 @@
 		</form>
     </table>
     <div class="clear spacer"></div>
-    <{if $nav_menu}>
+    <{if $nav_menu|default:false}>
         <div class="floatright"><{$nav_menu}></div>
         <div class="clear spacer"></div>
     <{/if}>

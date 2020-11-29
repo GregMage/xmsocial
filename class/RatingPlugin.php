@@ -63,7 +63,7 @@ class RatingPlugin {
 		return $active_plugin;
 	}
 	
-	public function RedirectUrl($rating_name = '', $itemid, $options = array())
+	public function RedirectUrl($rating_name = '', $itemid = 0, $options = array())
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
 			return basename ('Xmsocial' . $rating_name)::RedirectUrl($itemid, $options);
@@ -72,7 +72,7 @@ class RatingPlugin {
 		}
 	}
 	
-	public function Url($rating_name = '', $itemid)
+	public function Url($rating_name = '', $itemid = 0)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
 			return basename ('Xmsocial' . $rating_name)::Url($itemid);
@@ -81,7 +81,7 @@ class RatingPlugin {
 		}
 	}
 	
-	public function ItemNames($rating_name = '', $itemids)
+	public function ItemNames($rating_name, $itemids)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
 			return basename ('Xmsocial' . $rating_name)::ItemNames($itemids);
@@ -90,7 +90,7 @@ class RatingPlugin {
 		}
 	}
 	
-	public function SaveRating($rating_name = '', $itemid, $rating, $vote)
+	public function SaveRating($rating_name, $itemid, $rating, $vote)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {			
 			return basename ('Xmsocial' . $rating_name)::SaveRating($itemid, $rating, $vote);

@@ -105,9 +105,9 @@ use \Xmf\Request;
 	*/
     public static function render($url, $options)
     {
-		$ret  = '<!-- Load Facebook SDK for JavaScript -->';
-		$ret .= '<div id="fb-root"></div>';
-		$ret .= '<script async defer src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2"></script>';
+		$ret  = "<!-- Load Facebook SDK for JavaScript -->";
+		$ret .= "<div id='fb-root'></div>";
+		$ret .= "<script async defer src='https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.2'></script>";
 		$ret .= '<div class="fb-like" data-href="' . $url . '" data-width="' . $options[3] . '" data-layout="' . $options[1] . '" data-action="' . $options[0] . '" data-size="' . $options[2] . '" data-show-faces="' . $options[5] . '" data-share="' . $options[4] . '"></div>';
 
         return $ret;

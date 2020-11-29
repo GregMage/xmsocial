@@ -24,6 +24,9 @@ define('_MA_XMSOCIAL_SOCIAL_LIST', 'Social media list');
 define('_MA_XMSOCIAL_ERROR_NOSOCIAL', 'There are no social media');
 define('_MA_XMSOCIAL_ERROR_NORATING', 'There are no rate');
 
+// Warning message
+define('_MA_XMSOCIAL_WARNING_TRACKER', 'Be careful, if your browser is set in such a way as to block trackers, social media will not be displayed');
+
 // Shared
 define('_MA_XMSOCIAL_ADD', 'Add');
 define('_MA_XMSOCIAL_ACTION', 'Action');

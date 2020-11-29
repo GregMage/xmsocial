@@ -24,6 +24,9 @@ define('_MA_XMSOCIAL_SOCIAL_LIST', 'Liste des médias sociaux');
 define('_MA_XMSOCIAL_ERROR_NOSOCIAL', 'Il n\'y a pas de médias sociaux');
 define('_MA_XMSOCIAL_ERROR_NORATING', 'Il n\'y a pas d\'évaluations');
 
+// Warning message
+define('_MA_XMSOCIAL_WARNING_TRACKER', 'Attention, si votre navigateur est paramétré de manière à bloquer les traqueurs, les réseaux sociaux ne seront pas affichés');
+
 // Shared
 define('_MA_XMSOCIAL_ADD', 'Ajout');
 define('_MA_XMSOCIAL_ACTION', 'Action');
