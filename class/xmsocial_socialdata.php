@@ -36,6 +36,8 @@ class xmsocial_socialdata extends XoopsObject
 		$this->initVar('socialdata_socialid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('socialdata_modid', XOBJ_DTYPE_INT, null, false, 11);
 		$this->initVar('socialdata_itemid', XOBJ_DTYPE_INT, null, false, 11);
+		$this->initVar('social_type', XOBJ_DTYPE_TXTBOX, null, false);
+		$this->initVar('social_options', XOBJ_DTYPE_TXTBOX, null, false);
     }
     /**
      * @return mixed

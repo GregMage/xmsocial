@@ -222,4 +222,35 @@ class XmsocialUtility{
 		$error_message = $socialdataHandler->deleteAll($criteria);
         return $error_message;
     }
+	
+	public static function renderSocial($modulename = '', $itemid = 0, $url = '')
+    {
+        include __DIR__ . '/../include/common.php';
+		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
+		$error_message = '';
+		
+		$helper = Helper::getHelper($modulename);
+		$moduleid = $helper->getModule()->getVar('mid');
+		$criteria = new CriteriaCompo();
+		$criteria->add(new Criteria('socialdata_modid', $moduleid));
+		$criteria->add(new Criteria('socialdata_itemid', $itemid));
+		$criteria->add(new Criteria('social_status', 1));
+		$criteria->setSort('social_weight ASC, social_name');
+		$criteria->setOrder('ASC');
+		
+		$socialdataHandler->table_link = $socialdataHandler->db->prefix("xmsocial_social");
+		$socialdataHandler->field_link = "social_id";
+		$socialdataHandler->field_object = "socialdata_socialid";
+		$social_arr = $socialdataHandler->getByLink($criteria);
+		$social = '';
+		if (count($social_arr) > 0) {
+			$SocialPlugin = new SocialPlugin();
+
+			foreach (array_keys($social_arr) as $i) {
+				$options = explode(',', $social_arr[$i]->getVar('social_options'));
+				$social .= $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $url, $options);
+			}
+		}
+        return $social;
+    }
 }
