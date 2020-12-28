@@ -20,9 +20,16 @@
 use \Xmf\Request;
 use Xmf\Module\Helper;
 
+/**
+ * Class Xmsocialxmdoc
+ */
  class Xmsocialxmdoc
  {
-	
+     /**
+      * @param $itemid
+      * @param $options
+      * @return string
+      */
 	public static function RedirectUrl($itemid, $options)
 	{
 		if ($options['mod'] == 'xmnews'){
@@ -35,7 +42,13 @@ use Xmf\Module\Helper;
 		
 		return XOOPS_URL . '/modules/xmdoc/index.php';
 	}
-	
+
+     /**
+      * @param $itemid
+      * @param $rating
+      * @param $votes
+      * @return bool
+      */
 	public static function SaveRating($itemid, $rating, $votes)
 	{
 		$helper = Helper::getHelper('xmdoc');
@@ -54,12 +67,20 @@ use Xmf\Module\Helper;
 		}
 		return false;
 	}
-	
+
+     /**
+      * @param $itemid
+      * @return string
+      */
 	public static function Url($itemid)
 	{
 		return XOOPS_URL . '/modules/xmdoc/admin/document.php?op=edit&document_id=' . $itemid;
 	}
-	
+
+     /**
+      * @param $itemids
+      * @return array
+      */
 	public static function ItemNames($itemids)
 	{
 		$helper = Helper::getHelper('xmdoc');

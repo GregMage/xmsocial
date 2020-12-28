@@ -20,14 +20,27 @@
 use \Xmf\Request;
 use Xmf\Module\Helper;
 
+/**
+ * Class Xmsocialxmtutorial
+ */
  class Xmsocialxmtutorial
  {
-	
+     /**
+      * @param $itemid
+      * @param $options
+      * @return string
+      */
 	public static function RedirectUrl($itemid, $options)
 	{
 		return XOOPS_URL . '/modules/xmtutorial/tutorial.php?tutorial_id=' . $itemid;
 	}
-	
+
+     /**
+      * @param $itemid
+      * @param $rating
+      * @param $votes
+      * @return bool
+      */
 	public static function SaveRating($itemid, $rating, $votes)
 	{
 		$helper = Helper::getHelper('xmtutorial');
@@ -46,12 +59,20 @@ use Xmf\Module\Helper;
 		}
 		return false;
 	}
-	
+
+     /**
+      * @param $itemid
+      * @return string
+      */
 	public static function Url($itemid)
 	{
 		return XOOPS_URL . '/modules/xmtutorial/tutorial.php?tutorial_id=' . $itemid;
 	}
-	
+
+     /**
+      * @param $itemids
+      * @return array
+      */
 	public static function ItemNames($itemids)
 	{
 		$helper = Helper::getHelper('xmtutorial');

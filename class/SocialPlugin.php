@@ -17,11 +17,16 @@
  * @author          Mage Gregory (AKA Mage)
  */
 
+/**
+ * Class SocialPlugin
+ */
 class SocialPlugin {
 	
 	private $socialNames;
-	
-	
+
+    /**
+     * SocialPlugin constructor.
+     */
 	public function __construct()
     {
 		$social_names = XoopsLists::getFileListByExtension(XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/', array('php'));
@@ -30,12 +35,20 @@ class SocialPlugin {
 			include_once XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/' . $social_name;
 		}
     }
-	
+
+    /**
+     * @return mixed
+     */
 	public function getSocialNames()
 	{
 		return $this->socialNames;
 	}
-	
+
+    /**
+     * @param string $social_name
+     * @param array $options
+     * @return string
+     */
 	public function getOptionsEdit($social_name = '', $options = array())
 	{
 		$this->loadLanguage($social_name);
@@ -45,7 +58,11 @@ class SocialPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param string $social_name
+     * @return string
+     */
 	public function optionsSave($social_name = '')
 	{
 		if (in_array($social_name, $this->socialNames)) {			
@@ -54,7 +71,13 @@ class SocialPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param string $social_name
+     * @param string $url
+     * @param array $options
+     * @return string
+     */
 	public function render($social_name = '', $url = '', $options = array())
 	{		
 		if (in_array($social_name, $this->socialNames)) {			
@@ -63,7 +86,11 @@ class SocialPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param string $social_name
+     * @return bool|mixed
+     */
 	public function loadLanguage($social_name = '')
     {
         $language = $GLOBALS['xoopsConfig']['language'];

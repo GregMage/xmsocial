@@ -18,11 +18,18 @@
  */
  use Xmf\Module\Helper;
 
+/**
+ * Class RatingPlugin
+ */
 class RatingPlugin {
-	
+    /**
+     * @var
+     */
 	private $ratingNames;
-	
-	
+
+    /**
+     * RatingPlugin constructor.
+     */
 	public function __construct()
     {
 		$rating_names = XoopsLists::getFileListByExtension(XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/rating/', array('php'));
@@ -31,12 +38,19 @@ class RatingPlugin {
 			include_once XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/rating/' . $rating_name;
 		}
     }
-	
+
+    /**
+     * @return mixed
+     */
 	public function getRatingNames()
 	{
 		return $this->ratingNames;
 	}
-	
+
+    /**
+     * @param string $rating_name
+     * @return bool
+     */
 	public function CheckPlugin($rating_name = '')
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
@@ -49,7 +63,10 @@ class RatingPlugin {
 			return false;
 		}
 	}
-	
+
+    /**
+     * @return array
+     */
 	public function ListPlugin()
 	{
 		$active_plugin = array();
@@ -62,7 +79,13 @@ class RatingPlugin {
 		}
 		return $active_plugin;
 	}
-	
+
+    /**
+     * @param string $rating_name
+     * @param int $itemid
+     * @param array $options
+     * @return string
+     */
 	public function RedirectUrl($rating_name = '', $itemid = 0, $options = array())
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
@@ -71,7 +94,12 @@ class RatingPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param string $rating_name
+     * @param int $itemid
+     * @return string
+     */
 	public function Url($rating_name = '', $itemid = 0)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
@@ -80,7 +108,12 @@ class RatingPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param $rating_name
+     * @param $itemids
+     * @return string
+     */
 	public function ItemNames($rating_name, $itemids)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
@@ -89,7 +122,14 @@ class RatingPlugin {
 			return '';
 		}
 	}
-	
+
+    /**
+     * @param $rating_name
+     * @param $itemid
+     * @param $rating
+     * @param $vote
+     * @return string
+     */
 	public function SaveRating($rating_name, $itemid, $rating, $vote)
 	{
 		if (in_array($rating_name, $this->ratingNames)) {			

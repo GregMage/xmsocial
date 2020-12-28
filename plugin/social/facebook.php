@@ -19,12 +19,18 @@
  
 use \Xmf\Request;
 
+/**
+ * Class XmsocialFacebook
+ */
  class XmsocialFacebook
  {
 	
 	private $dataLayout = '';
-	
-	
+
+     /**
+      * @param $options
+      * @return string
+      */
 	public static function optionsEdit($options)
 	{
 		if (empty($options)){
@@ -73,7 +79,10 @@ use \Xmf\Request;
 		
 		return $form->render();
 	}
-	
+
+     /**
+      * @return string
+      */
 	public static function optionsSave()
 	{
 		$return = Request::getString('Data_action', '') . ',';
@@ -96,13 +105,12 @@ use \Xmf\Request;
 		}
 		return $return;
 	}
-	 
-	 
-	/**
-	* Make the facebook plugin into a string
-	*
-	* @return string
-	*/
+
+     /**
+      * @param $url
+      * @param $options
+      * @return string
+      */
     public static function render($url, $options)
     {
 		$ret  = "<!-- Load Facebook SDK for JavaScript -->";

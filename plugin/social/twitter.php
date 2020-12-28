@@ -19,12 +19,18 @@
  
 use \Xmf\Request;
 
+/**
+ * Class XmsocialTwitter
+ */
  class XmsocialTwitter
  {
 	
 	private $dataLayout = '';
-	
-	
+
+     /**
+      * @param $options
+      * @return string
+      */
 	public static function optionsEdit($options)
 	{
 		if (empty($options)){
@@ -86,7 +92,10 @@ use \Xmf\Request;
 		$form->addElement($formSize);		
 		return $form->render();	
 	}
-	
+
+     /**
+      * @return string
+      */
 	public static function optionsSave()
 	{
 		$return = Request::getString('prefil', '') . ',';
@@ -96,13 +105,11 @@ use \Xmf\Request;
 		$return .= Request::getString('size', '');
 		return $return;
 	}
-	 
-	 
-	/**
-	* Make the facebook plugin into a string
-	*
-	* @return string
-	*/
+     /**
+      * @param $url
+      * @param $options
+      * @return string
+      */
     public static function render($url, $options)
     {		
 		$ret  = '<a href="https://twitter.com/share?ref_src=' . $url . '" class="twitter-share-button" data-show-count="false" ';
