@@ -121,10 +121,6 @@ use \Xmf\Request;
 		}
 		$ret .= '></a>';
 		$ret .= '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
-		
-		//$ret  = '<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Ceci est un test" data-url="https://www.monxoops.fr/" data-hashtags="prout" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
-		//$ret  = '<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Ceci est un test" data-url="https://www.monxoops.fr/" data-hashtags="prout" data-lang="fr" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
-		//$ret  = '<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Ceci est un test" data-url="https://www.monxoops.fr/" data-hashtags="prout" data-lang="fr" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
 
         return $ret;
     }
