@@ -18,10 +18,10 @@
  * @author          Mage Gregory (AKA Mage)
  */
 use Xmf\Module\Helper;
+
 /**
  * Class XmsocialUtility
  */
-
 class XmsocialUtility{
 	
 	public static function renderRating($xoTheme, $modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0, $options = array())
@@ -59,7 +59,12 @@ class XmsocialUtility{
 		
 		return $xmsocial_rating;
     }
-	
+
+    /**
+     * @param int $rating
+     * @param int $votes
+     * @return string
+     */
 	public static function renderVotes($rating = 0, $votes = 0)
     {
 		$xmsocialHelper = Helper::getHelper('xmsocial');
@@ -73,7 +78,13 @@ class XmsocialUtility{
 		
 		return $xmsocial_rating;
     }
-	
+
+    /**
+     * @param $modulename
+     * @param $itemid
+     * @param $moduleid
+     * @return bool
+     */
 	public static function updateRating($modulename, $itemid, $moduleid)
     {
 		include __DIR__ . '/../include/common.php';
@@ -99,7 +110,12 @@ class XmsocialUtility{
 			return false;
 		}
     }
-	
+
+    /**
+     * @param string $modulename
+     * @param int $itemid
+     * @return string
+     */
 	public static function delRatingdata($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
@@ -113,7 +129,13 @@ class XmsocialUtility{
 		$error_message = $ratingHandler->deleteAll($criteria);
         return $error_message;
     }
-	
+
+    /**
+     * @param $form
+     * @param string $modulename
+     * @param int $itemid
+     * @return mixed
+     */
     public static function renderSocialForm($form, $modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
@@ -154,6 +176,11 @@ class XmsocialUtility{
 		return $form;
     }
 
+    /**
+     * @param string $modulename
+     * @param int $itemid
+     * @return string
+     */
 	public static function saveSocial($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
@@ -208,7 +235,12 @@ class XmsocialUtility{
 		}
         return $error_message;
     }
-	
+
+    /**
+     * @param string $modulename
+     * @param int $itemid
+     * @return string
+     */
 	public static function delSocialdata($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
@@ -222,13 +254,18 @@ class XmsocialUtility{
 		$error_message = $socialdataHandler->deleteAll($criteria);
         return $error_message;
     }
-	
-	public static function renderSocial($modulename = '', $itemid = 0, $url = '')
+
+    /**
+     * @param $xoopsTpl
+     * @param string $modulename
+     * @param int $itemid
+     * @param string $url
+     */
+	public static function renderSocial($xoopsTpl, $modulename = '', $itemid = 0, $url = '')
     {
         include __DIR__ . '/../include/common.php';
 		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
-		$error_message = '';
-		
+
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
@@ -242,15 +279,14 @@ class XmsocialUtility{
 		$socialdataHandler->field_link = "social_id";
 		$socialdataHandler->field_object = "socialdata_socialid";
 		$social_arr = $socialdataHandler->getByLink($criteria);
-		$social = '';
 		if (count($social_arr) > 0) {
 			$SocialPlugin = new SocialPlugin();
-
 			foreach (array_keys($social_arr) as $i) {
 				$options = explode(',', $social_arr[$i]->getVar('social_options'));
-				$social .= $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $url, $options);
+				$social = $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $url, $options);
+                $xoopsTpl->append_by_ref('social_arr', $social);
+                unset($social);
 			}
 		}
-        return $social;
     }
 }

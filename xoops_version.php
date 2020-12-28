@@ -58,8 +58,7 @@ $modversion['templates'][] = array('file' => 'xmsocial_admin_permission.tpl', 'd
 
 // User Templates
 $modversion['templates'][] = array('file' => 'xmsocial_rating.tpl', 'description' => '');
-
-
+$modversion['templates'][] = array('file' => 'xmsocial_social.tpl', 'description' => '');
 
 // Configs
 $modversion['config'] = array();
