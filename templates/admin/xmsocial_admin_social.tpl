@@ -15,10 +15,10 @@
         <{$form}>
     </div>
 <{/if}>
-<div class="xm-warning-msg" style="text-align: center;">
-	<{$smarty.const._MA_XMSOCIAL_WARNING_TRACKER}>
-</div>
 <{if $social_count|default:0 != 0}>
+	<div class="xm-warning-msg" style="text-align: center;">
+		<{$smarty.const._MA_XMSOCIAL_WARNING_TRACKER}>
+	</div>
     <table id="xo-xmdoc-sorter" cellspacing="1" class="outer tablesorter">
         <thead>
         <tr>
