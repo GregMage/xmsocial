@@ -36,6 +36,10 @@ use Xmf\Module\Helper;
 			return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $options['id'];
 		}
 		
+		if ($options['mod'] == 'xmtutorial'){
+			return XOOPS_URL . '/modules/xmtutorial/tutorial.php?tutorial_id=' . $options['id'];
+		}
+		
 		if ($options['mod'] == 'xmdoc_document'){
 			return XOOPS_URL . '/modules/xmdoc/document.php?doc_id=' . $options['id'];
 		}
