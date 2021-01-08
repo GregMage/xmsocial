@@ -51,7 +51,7 @@ class XmsocialUtility{
 				unset($count_stars);
 			}
 			$xmsocial_rating['module'] = $modulename;
-			$xmsocial_rating['size'] = (25 * number_format($rating, 1)) . 'px';
+			$xmsocial_rating['size'] = number_format(25 * $rating, 1) . 'px';
 			$xmsocial_rating['itemid'] = $itemid;
 		}			
 		$xmsocial_rating['rating'] = XmsocialUtility::renderVotes($rating, $votes);
@@ -69,7 +69,7 @@ class XmsocialUtility{
     {
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');	
-		$xmsocial_rating = number_format($rating, 1) . ' ';;
+		$xmsocial_rating = number_format($rating, 1) . ' ';
 		if ($votes < 2) {
 			$xmsocial_rating .= sprintf(_MA_XMSOCIAL_RATING_VOTE, $votes);
 		} else {		
@@ -100,7 +100,7 @@ class XmsocialUtility{
 			$rating = $rating + $rating_arr[$i]->getVar('rating_value');
 		}
 		if ($votes != 0) {
-			$rating = number_format($rating/$votes);
+			$rating = number_format($rating/$votes, 4);
 		} else {
 			$rating = 0;
 		}
@@ -139,7 +139,7 @@ class XmsocialUtility{
     public static function renderSocialForm($form, $modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
-		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
+		include_once __DIR__ . '/RatingPlugin.php';
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');
 		// module id
@@ -264,7 +264,7 @@ class XmsocialUtility{
 	public static function renderSocial($xoopsTpl, $modulename = '', $itemid = 0, $url = '')
     {
         include __DIR__ . '/../include/common.php';
-		xoops_load('SocialPlugin', basename(dirname(__DIR__)));
+		include_once __DIR__ . '/SocialPlugin.php';
 
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');

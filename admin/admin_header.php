@@ -24,8 +24,8 @@ include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 include_once __DIR__ . '/../include/common.php';
 
 xoops_load('utility', basename(dirname(__DIR__)));
-xoops_load('SocialPlugin', basename(dirname(__DIR__)));
-xoops_load('RatingPlugin', basename(dirname(__DIR__)));
+include_once __DIR__ . '/../class/SocialPlugin.php';
+include_once __DIR__ . '/../class/RatingPlugin.php';
 
 class_exists('\Xmf\Module\Admin') or die('XMF is required.');
 

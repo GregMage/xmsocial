@@ -22,10 +22,7 @@ require_once $path . '/mainfile.php';
 include_once __DIR__ . '/include/common.php';
 
 xoops_load('utility', basename(__DIR__));
-
-//xoops_load('utility', basename(__DIR__));
-xoops_load('RatingPlugin', basename(__DIR__));
-
+include_once __DIR__ . '/class/RatingPlugin.php';
 $helper     = Helper::getHelper('xmsocial');
 $permHelper = new Helper\Permission();
 
