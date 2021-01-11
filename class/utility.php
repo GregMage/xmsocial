@@ -139,7 +139,6 @@ class XmsocialUtility{
     public static function renderSocialForm($form, $modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
-		include_once __DIR__ . '/RatingPlugin.php';
 		include_once __DIR__ . '/SocialPlugin.php';
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');
