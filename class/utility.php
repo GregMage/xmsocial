@@ -140,6 +140,7 @@ class XmsocialUtility{
     {
         include __DIR__ . '/../include/common.php';
 		include_once __DIR__ . '/RatingPlugin.php';
+		include_once __DIR__ . '/SocialPlugin.php';
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');
 		// module id
