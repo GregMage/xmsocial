@@ -49,7 +49,7 @@ define('_MA_XMSOCIAL_SOCIAL_WEIGHT', 'Poids');
 define('_MA_XMSOCIAL_SOCIAL_FORM', 'Choix des liens de partage (médias sociaux) à afficher');
 
 // Rating
-define('_MA_XMSOCIAL_RATING_RATING', 'Evaluation');
+define('_MA_XMSOCIAL_RATING_RATING', 'Note');
 define('_MA_XMSOCIAL_RATING_VOTE', 'vote');
 define('_MA_XMSOCIAL_RATING_VOTES', 'votes');
 define('_MA_XMSOCIAL_RATE_ALREADYVOTED', 'Vous avez déjà voté!');
