@@ -54,7 +54,13 @@ class XmsocialUtility{
 			$xmsocial_rating['size'] = number_format(25 * $rating, 1) . 'px';
 			$xmsocial_rating['itemid'] = $itemid;
 		}			
-		$xmsocial_rating['rating'] = XmsocialUtility::renderVotes($rating, $votes);
+		$xmsocial_rating['votes'] = $votes;
+		$xmsocial_rating['rating'] = number_format($rating, 1);
+		if ($votes < 2) {
+			$xmsocial_rating['text'] = _MA_XMSOCIAL_RATING_VOTE;
+		} else {		
+			$xmsocial_rating['text'] = _MA_XMSOCIAL_RATING_VOTES;
+		}
 		$xmsocial_rating['options'] = $options;
 		
 		return $xmsocial_rating;
@@ -71,9 +77,9 @@ class XmsocialUtility{
 		$xmsocialHelper->loadLanguage('main');	
 		$xmsocial_rating = number_format($rating, 1) . ' ';
 		if ($votes < 2) {
-			$xmsocial_rating .= sprintf(_MA_XMSOCIAL_RATING_VOTE, $votes);
+			$xmsocial_rating .= '(' . $votes . ' ' . _MA_XMSOCIAL_RATING_VOTE .')';
 		} else {		
-			$xmsocial_rating .= sprintf(_MA_XMSOCIAL_RATING_VOTES, $votes);
+			$xmsocial_rating .= '(' . $votes . ' ' . _MA_XMSOCIAL_RATING_VOTES .')';
 		}
 		
 		return $xmsocial_rating;

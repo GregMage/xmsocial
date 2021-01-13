@@ -50,8 +50,8 @@ define('_MA_XMSOCIAL_SOCIAL_FORM', 'Choice of sharing links (social media) to di
 
 // Rating
 define('_MA_XMSOCIAL_RATING_RATING', 'Rating');
-define('_MA_XMSOCIAL_RATING_VOTE', '(%s vote)');
-define('_MA_XMSOCIAL_RATING_VOTES', '(%s votes)');
+define('_MA_XMSOCIAL_RATING_VOTE', 'vote');
+define('_MA_XMSOCIAL_RATING_VOTES', 'votes');
 define('_MA_XMSOCIAL_RATE_ALREADYVOTED', 'You have already voted!');
 define('_MA_XMSOCIAL_RATE_RATED', 'Thank you for your vote');
 define('_MA_XMSOCIAL_RATE_NOTRATED', 'Your vote could not be recorded!');
