@@ -125,15 +125,13 @@ class XmsocialUtility{
 	public static function delRatingdata($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
-		$error_message = '';
-		
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('rating_modid', $moduleid));
 		$criteria->add(new Criteria('rating_itemid', $itemid));
-		$error_message = $ratingHandler->deleteAll($criteria);
-        return $error_message;
+		$ratingHandler->deleteAll($criteria);
+        return '';
     }
 
     /**
@@ -250,15 +248,14 @@ class XmsocialUtility{
 	public static function delSocialdata($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
-		$error_message = '';
 		
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('socialdata_modid', $moduleid));
 		$criteria->add(new Criteria('socialdata_itemid', $itemid));
-		$error_message = $socialdataHandler->deleteAll($criteria);
-        return $error_message;
+		$socialdataHandler->deleteAll($criteria);
+        return '';
     }
 
     /**
