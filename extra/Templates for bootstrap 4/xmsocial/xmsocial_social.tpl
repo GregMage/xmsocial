@@ -1,6 +1,6 @@
-<div class="row">
+<div class="d-flex flex-row my-1 mx-auto flex-wrap align-items-center">
 <{foreach item=itemsocial from=$social_arr}>
-	<div class="col-6 col-md-4 col-lg-3">
+	<div class="mr-1 mb-1">
 		<{$itemsocial}>
 	</div>
 <{/foreach}>
