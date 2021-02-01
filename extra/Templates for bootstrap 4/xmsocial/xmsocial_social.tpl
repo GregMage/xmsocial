@@ -1,6 +1,6 @@
-<div class="row bg-secondary rounded pt-2 pb-1 mt-1 mx-auto text-truncate justify-content-between">
+<div class="d-flex flex-row my-1 mx-auto flex-wrap align-items-center">
 <{foreach item=itemsocial from=$social_arr}>
-	<div class="col-12 col-lg-6 mb-1 mb-lg-0">
+	<div class="mr-1 mb-1">
 		<{$itemsocial}>
 	</div>
 <{/foreach}>
