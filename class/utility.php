@@ -290,6 +290,8 @@ class XmsocialUtility{
                 $xoopsTpl->append_by_ref('social_arr', $social);
                 unset($social);
 			}
+		} else {
+			$xoopsTpl->assign('social_arr', array());
 		}
     }
 }
