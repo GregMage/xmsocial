@@ -31,7 +31,7 @@ $modversion['official']    = 0;
 $modversion['image']       = 'assets/images/xmsocial_logo.png';
 
 // Menu
-$modversion['hasMain'] = 1;
+$modversion['hasMain'] = 0;
 
 // Admin things
 $modversion['hasAdmin']    = 1;
