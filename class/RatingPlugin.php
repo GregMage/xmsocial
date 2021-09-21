@@ -100,10 +100,10 @@ class RatingPlugin {
      * @param int $itemid
      * @return string
      */
-	public function Url($rating_name = '', $itemid = 0)
+	public function Url($rating_name = '', $itemid = 0, $options = array())
 	{
 		if (in_array($rating_name, $this->ratingNames)) {
-			return basename ('Xmsocial' . $rating_name)::Url($itemid);
+			return basename ('Xmsocial' . $rating_name)::Url($itemid, $options);
 		} else {			
 			return '';
 		}

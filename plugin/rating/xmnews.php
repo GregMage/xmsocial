@@ -64,9 +64,9 @@ use Xmf\Module\Helper;
       * @param $itemid
       * @return string
       */
-	public static function Url($itemid)
+	public static function Url($itemid, $options)
 	{
-		return XOOPS_URL . '/modules/xmnews/article.php?news_id=' . $itemid;
+		return self::RedirectUrl($itemid, $options);
 	}
 
      /**

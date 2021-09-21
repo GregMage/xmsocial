@@ -66,7 +66,7 @@ use Xmf\Module\Helper;
       */
 	public static function Url($itemid)
 	{
-		return XOOPS_URL . '/modules/xmcontent/viewcontent.php?content_id=' . $itemid;
+		return self::RedirectUrl($itemid, $options);
 	}
 
      /**

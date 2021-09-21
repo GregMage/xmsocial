@@ -76,7 +76,7 @@ use Xmf\Module\Helper;
       * @param $itemid
       * @return string
       */
-	public static function Url($itemid)
+	public static function Url($itemid, $options)
 	{
 		return XOOPS_URL . '/modules/xmdoc/admin/document.php?op=edit&document_id=' . $itemid;
 	}
