@@ -1,6 +1,8 @@
 ﻿------------------------------------------------
-Version: 0.10 Alpha
-Date:    12.02.2019
+Version: 1.0 Final
+Date:    22.09.2021
 -------------------------------------------------
 
-Lancement du projet xmsocial
+Première version du module.
+
+First version of the module.
