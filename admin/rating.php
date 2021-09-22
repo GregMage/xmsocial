@@ -209,7 +209,7 @@ switch ($op) {
 						$modulename = '';
 					} else {
 						$item_name = $RatingPlugin->ItemNames($modules[$obj->getVar('rating_modid')]['dirname'], array($obj->getVar('rating_itemid')));
-						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $item_name[$obj->getVar('rating_itemid')] . '</a>';
+						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid'), $obj->getVar('rating_options')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $item_name[$obj->getVar('rating_itemid')] . '</a>';
 						$modulename = $modules[$obj->getVar('rating_modid')]['dirname'];
 					}
 				}			
