@@ -17,6 +17,7 @@ CREATE TABLE `xmsocial_rating` (
   `rating_uid`          	smallint(5)  unsigned   NOT NULL default '0',
   `rating_hostname`     	varchar(50)             NOT NULL DEFAULT '',
   `rating_date`           	int(10)      unsigned   NOT NULL DEFAULT '0',
+  `rating_options`     		varchar(255)            NOT NULL DEFAULT '',
   
   PRIMARY KEY (`rating_id`)
 ) ENGINE=MyISAM;

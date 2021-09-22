@@ -64,6 +64,7 @@ $obj->setVar('rating_value', $rating);
 $obj->setVar('rating_uid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 $obj->setVar('rating_hostname', getenv("REMOTE_ADDR"));
 $obj->setVar('rating_date', time());
+$obj->setVar('rating_options', $options);
 if ($ratingHandler->insert($obj)){	
 	if (XmsocialUtility::updateRating($modulename, $itemid, $moduleid) == true){
 		redirect_header($redirect_url, 3, _MA_XMSOCIAL_RATE_RATED);

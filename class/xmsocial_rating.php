@@ -39,6 +39,7 @@ class xmsocial_rating extends XoopsObject
         $this->initVar('rating_uid', XOBJ_DTYPE_INT, null, false, 5);        
         $this->initVar('rating_hostname', XOBJ_DTYPE_TXTBOX, null, false);
 		$this->initVar('rating_date', XOBJ_DTYPE_INT, null, false, 10);
+		$this->initVar('rating_options', XOBJ_DTYPE_ARRAY, []);
 
     }
 

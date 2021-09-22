@@ -147,7 +147,7 @@ switch ($op) {
 					if ($RatingPlugin->CheckPlugin($modules[$rating_arr[$i]->getVar('rating_modid')]['dirname']) == false){
 						$rating['item']   = '';
 					} else {
-						$rating['item']   = $RatingPlugin->Url($modules[$rating_arr[$i]->getVar('rating_modid')]['dirname'], $rating_arr[$i]->getVar('rating_itemid'));
+						$rating['item']   = $RatingPlugin->Url($modules[$rating_arr[$i]->getVar('rating_modid')]['dirname'], $rating_arr[$i]->getVar('rating_itemid'), $rating_arr[$i]->getVar('rating_options'));
 					}
 				}
                 $rating['date']		   = formatTimestamp($rating_arr[$i]->getVar('rating_date'), 'm');
