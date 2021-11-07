@@ -24,9 +24,10 @@ use Xmf\Module\Helper;
  */
 class XmsocialUtility{
 	
-	public static function renderRating($xoTheme, $modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0, $options = array())
+	public static function renderRating($modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0, $options = array())
     {
-        $xmsocial_rating = array();
+		$xmsocial_rating = array();
+		global $xoTheme;
 		include __DIR__ . '/../include/common.php';
 		$permHelper = new Helper\Permission('xmsocial');
 		$xmsocialHelper = Helper::getHelper('xmsocial');
@@ -42,7 +43,7 @@ class XmsocialUtility{
 		$moduleid = $helper->getModule()->getVar('mid');
 		if ($permHelper->checkPermission('xmsocial_rating', $moduleid) === false){	
 			$xmsocial_rating['perm'] = false;
-		} else {    
+		} else {
 			$xoTheme->addStylesheet( XOOPS_URL . '/modules/xmsocial/assets/css/rating.css', null );
 			$xmsocial_rating['perm'] = true;			
 			for ($count = 1; $count <= $stars; $count++){
@@ -264,11 +265,12 @@ class XmsocialUtility{
      * @param int $itemid
      * @param string $url
      */
-	public static function renderSocial($xoopsTpl, $modulename = '', $itemid = 0, $url = '')
+	public static function renderSocial($modulename = '', $itemid = 0, $url = '')
     {
         include __DIR__ . '/../include/common.php';
 		include_once __DIR__ . '/SocialPlugin.php';
-
+		global $xoopsTpl;
+		
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
