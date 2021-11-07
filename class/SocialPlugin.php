@@ -31,8 +31,10 @@ class SocialPlugin {
     {
 		$social_names = XoopsLists::getFileListByExtension(XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/', array('php'));
 		foreach ($social_names as $social_name) {
-			$this->socialNames[] = basename($social_name, '.php');
-			include_once XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/' . $social_name;
+			if ($social_name != 'index.php'){
+				$this->socialNames[] = basename($social_name, '.php');
+				include_once XOOPS_ROOT_PATH . '/modules/xmsocial/plugin/social/' . $social_name;
+			}
 		}
     }
 
