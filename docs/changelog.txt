@@ -1,4 +1,29 @@
 ﻿------------------------------------------------
+Version: 2.0.0 RC1 NOT RELEASED
+Date:    07.11.2021
+-------------------------------------------------
+
+Bug fixes:
+	- Index.php was displayed in the list of social media plugins when adding a social media
+
+Improvements:
+	- Optimization of renderRating () and renderSocial (xmsocialutility) functions. This modification breaks the backward compatibility of the module, it will not work with incompatible modules. 
+
+Security:
+	- 
+
+
+Correction de bogues:	
+	- Index.php était affiché dans la liste des plugins médias sociaux lors de l'ajout d'un média social.
+
+Améliorations:
+	- Optimisation des fonctions renderRating() et renderSocial (xmsocialutility). Cette modification casse la rétro compatibilité du module, il ne fonctionnera pas avec les modules non compatibles.
+
+Sécurités:
+	/
+
+
+------------------------------------------------
 Version: 1.0 Final
 Date:    22.09.2021
 -------------------------------------------------
