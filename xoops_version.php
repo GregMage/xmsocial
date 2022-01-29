@@ -82,8 +82,8 @@ $modversion['config'][] = array(
 );
 
 // About stuff
-$modversion['module_status'] = 'RC1';
-$modversion['release_date']  = '2021/12/17';
+$modversion['module_status'] = 'Stable';
+$modversion['release_date']  = '2022/01/29';
 
 $modversion['developer_lead']      = 'Mage';
 $modversion['module_website_url']  = 'www.monxoops.fr/';
