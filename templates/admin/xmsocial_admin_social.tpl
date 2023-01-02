@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    IMG_ON = '<{xoAdminIcons success.png}>';
-    IMG_OFF = '<{xoAdminIcons cancel.png}>';
+    IMG_ON = '<{xoAdminIcons "success.png"}>';
+    IMG_OFF = '<{xoAdminIcons "cancel.png"}>';
 </script>
 <div>
     <{$renderbutton|default:''}>
@@ -31,25 +31,25 @@
         </tr>
         </thead>
         <tbody>
-        <{foreach item=social from=$social}>
+        <{foreach item=itemsocial from=$social}>
             <tr class="<{cycle values='even,odd'}> alignmiddle">
-                <td class="txtcenter"><{$social.render}></td>
-                <td class="txtleft"><{$social.type}></td>
-                <td class="txtleft"><{$social.name}></td>
-                <td class="txtcenter"><{$social.weight}></td>
+                <td class="txtcenter"><{$itemsocial.render}></td>
+                <td class="txtleft"><{$itemsocial.type}></td>
+                <td class="txtleft"><{$itemsocial.name}></td>
+                <td class="txtcenter"><{$itemsocial.weight}></td>
                 <td class="xo-actions txtcenter">
-                    <img id="loading_sml<{$social.id}>" src="../assets/images/spinner.gif" style="display:none;" title="<{$smarty.const._AM_SYSTEM_LOADING}>"
-                    alt="<{$smarty.const._AM_SYSTEM_LOADING}>"/><img class="cursorpointer tooltip" id="sml<{$social.id}>"
-                    onclick="system_setStatus( { op: 'social_update_status', social_id: <{$social.id}> }, 'sml<{$social.id}>', 'social.php' )"
-                    src="<{if $social.status}><{xoAdminIcons success.png}><{else}><{xoAdminIcons cancel.png}><{/if}>"
-                    alt="<{if $social.status}><{$smarty.const._MA_XMSOCIAL_STATUS_NA}><{else}><{$smarty.const._MA_XMSOCIAL_STATUS_A}><{/if}>"
-                    title="<{if $social.status}><{$smarty.const._MA_XMSOCIAL_STATUS_NA}><{else}><{$smarty.const._MA_XMSOCIAL_STATUS_A}><{/if}>"/>
+                    <img id="loading_sml<{$itemsocial.id}>" src="../assets/images/spinner.gif" style="display:none;" title="<{$smarty.const._AM_SYSTEM_LOADING}>"
+                    alt="<{$smarty.const._AM_SYSTEM_LOADING}>"/><img class="cursorpointer tooltip" id="sml<{$itemsocial.id}>"
+                    onclick="system_setStatus( { op: 'social_update_status', social_id: <{$itemsocial.id}> }, 'sml<{$itemsocial.id}>', 'social.php' )"
+                    src="<{if $itemsocial.status}><{xoAdminIcons 'success.png'}><{else}><{xoAdminIcons 'cancel.png'}><{/if}>"
+                    alt="<{if $itemsocial.status}><{$smarty.const._MA_XMSOCIAL_STATUS_NA}><{else}><{$smarty.const._MA_XMSOCIAL_STATUS_A}><{/if}>"
+                    title="<{if $itemsocial.status}><{$smarty.const._MA_XMSOCIAL_STATUS_NA}><{else}><{$smarty.const._MA_XMSOCIAL_STATUS_A}><{/if}>"/>
                 </td>
                 <td class="xo-actions txtcenter">
-                    <a class="tooltip" href="social.php?op=edit&amp;social_id=<{$social.id}>" title="<{$smarty.const._MA_XMSOCIAL_EDIT}>">
-                        <img src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._MA_XMSOCIAL_EDIT}>"/></a>
-                    <a class="tooltip" href="social.php?op=del&amp;social_id=<{$social.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
-                        <img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"/></a>
+                    <a class="tooltip" href="social.php?op=edit&amp;social_id=<{$itemsocial.id}>" title="<{$smarty.const._MA_XMSOCIAL_EDIT}>">
+                        <img src="<{xoAdminIcons 'edit.png'}>" alt="<{$smarty.const._MA_XMSOCIAL_EDIT}>"/></a>
+                    <a class="tooltip" href="social.php?op=del&amp;social_id=<{$itemsocial.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
+                        <img src="<{xoAdminIcons 'delete.png'}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"/></a>
                 </td>
             </tr>
         <{/foreach}>

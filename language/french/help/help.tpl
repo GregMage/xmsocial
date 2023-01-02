@@ -2,7 +2,7 @@
     <h1 class="head">Help:
         <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/xmsocial/admin/index.php"
            title="Retour à l'administration du module xmsocial"> Social
-            <img src="<{xoAdminIcons home.png}>"
+            <img src="<{xoAdminIcons 'home.png'}>"
                  alt="Retour à l'administration de xmsocial"/>
         </a></h1>
 

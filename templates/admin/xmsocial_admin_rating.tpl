@@ -43,30 +43,30 @@
         </thead>
 		<form name='ratinglist' id='commentslist' action='rating.php?op=purge' method="post">
 			<tbody>
-			<{foreach item=rating from=$rating}>
+			<{foreach item=itemrating from=$rating}>
 				<tr class="<{cycle values='even,odd'}> alignmiddle">
-					<td class="txtcenter"><input type='checkbox' name='ratinglist_id[]' id='ratinglist_id[]' value='<{$rating.id}>'/></td>
-					<td class="txtleft"><{$rating.date}></td>
-					<td class="txtcenter"><{$rating.value}></td>
-					<td class="txtcenter"><{$rating.uid}></td>
-					<td class="txtcenter"><{$rating.hostname}></td>
+					<td class="txtcenter"><input type='checkbox' name='ratinglist_id[]' id='ratinglist_id[]' value='<{$itemrating.id}>'/></td>
+					<td class="txtleft"><{$itemrating.date}></td>
+					<td class="txtcenter"><{$itemrating.value}></td>
+					<td class="txtcenter"><{$itemrating.uid}></td>
+					<td class="txtcenter"><{$itemrating.hostname}></td>
 					<td class="txtcenter">
-						<{$rating.modulename}>
-						<{if $rating.isactive == 0}>
+						<{$itemrating.modulename}>
+						<{if $itemrating.isactive == 0}>
 							<span style="color:red; font-weight:bold;"><{$smarty.const._MA_XMSOCIAL_RATING_MODULENOACTIVE}></span>
 						<{/if}>
 						
 					</td>
 					<{if $view_item|default:false}>
-						<td class="txtleft"><{$rating.title}></td>
+						<td class="txtleft"><{$itemrating.title}></td>
 					<{/if}>
 					<td class="xo-actions txtcenter">
-						<{if $rating.item != ''}>
-						<a class="tooltip" href="<{$rating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
-							<img src="<{xoAdminIcons view.png}>" alt="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>"></a>
+						<{if $itemrating.item != ''}>
+						<a class="tooltip" href="<{$itemrating.item}>" title="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>" target="_blank">
+							<img src="<{xoAdminIcons 'view.png'}>" alt="<{$smarty.const._MA_XMSOCIAL_RATING_VIEW}>"></a>
 						<{/if}>
-						<a class="tooltip" href="rating.php?op=del&amp;rating_id=<{$rating.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
-							<img src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"></a>
+						<a class="tooltip" href="rating.php?op=del&amp;rating_id=<{$itemrating.id}>" title="<{$smarty.const._MA_XMSOCIAL_DEL}>">
+							<img src="<{xoAdminIcons 'delete.png'}>" alt="<{$smarty.const._MA_XMSOCIAL_DEL}>"></a>
 					</td>
 				</tr>
 			<{/foreach}>
