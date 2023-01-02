@@ -23,7 +23,7 @@ require __DIR__ . '/admin_header.php';
 
 $moduleAdmin = Admin::getInstance();
 $moduleAdmin->displayNavigation('index.php');
-$moduleAdmin->addConfigModuleVersion('system', 214);
+$moduleAdmin->addConfigModuleVersion('system', '2.1.2');
 $moduleAdmin->displayIndex();
 
 require __DIR__ . '/admin_footer.php';
