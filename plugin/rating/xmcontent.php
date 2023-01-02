@@ -64,7 +64,7 @@ use Xmf\Module\Helper;
       * @param $itemid
       * @return string
       */
-	public static function Url($itemid)
+	public static function Url($itemid, $options)
 	{
 		return self::RedirectUrl($itemid, $options);
 	}
