@@ -15,6 +15,6 @@
 	</div>
 </small>
 <{else}>
-<span class="glyphicon glyphicon-star-empty" title="<{$smarty.const._MA_XMSOCIAL_RATING_RATING}>"></span>
+<i class="fa fa-star" aria-hidden="true"></i>
 <{$smarty.const._MA_XMSOCIAL_RATING_RATING}>: <{$down_xmsocial.rating}> (<{$down_xmsocial.votes}> <{$down_xmsocial.text}>)
 <{/if}>
