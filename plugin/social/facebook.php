@@ -34,7 +34,6 @@ use \Xmf\Request;
 	public static function optionsEdit($options)
 	{
 		if (empty($options)){
-			echo 'vide';
 			$options[] = 'like';
 			$options[] = 'standard';
 			$options[] = 'small';
