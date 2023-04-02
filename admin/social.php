@@ -34,11 +34,11 @@ switch ($op) {
         $xoTheme->addScript('modules/system/js/admin.js');
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSOCIAL_SOCIAL_ADD, 'social.php?op=add', 'add');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Get start pager
         $start = Request::getInt('start', 0);
         $xoopsTpl->assign('start', $start);
-        
+
         // Criteria
         $criteria = new CriteriaCompo();
         $criteria->setSort('social_weight ASC, social_name');
@@ -58,7 +58,7 @@ switch ($op) {
                 $social['type']        = $social_arr[$i]->getVar('social_type');
                 $social['weight']      = $social_arr[$i]->getVar('social_weight');
                 $social['status']      = $social_arr[$i]->getVar('social_status');
-                $xoopsTpl->append_by_ref('social', $social);
+                $xoopsTpl->appendByRef('social', $social);
                 unset($social);
             }
             // Display Page Navigation
@@ -70,7 +70,7 @@ switch ($op) {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NOSOCIAL);
         }
         break;
-    
+
     // Add
     case 'add':
         // Module admin
@@ -80,12 +80,12 @@ switch ($op) {
 		$form = $obj->getFormSocial();
 		$xoopsTpl->assign('form', $form->render());
         break;
-		
+
 	// Loadsocial
     case 'loadsocial':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSOCIAL_SOCIAL_LIST, 'social.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());  
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         $social_type = Request::getString('social_type', '');
         if ($social_type == '') {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NOSOCIAL);
@@ -95,12 +95,12 @@ switch ($op) {
 			$xoopsTpl->assign('form', $form->render());
         }
         break;
-        
+
     // Edit
     case 'edit':
         // Module admin
         $moduleAdmin->addItemButton(_MA_XMSOCIAL_SOCIAL_LIST, 'social.php', 'list');
-        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());        
+        $xoopsTpl->assign('renderbutton', $moduleAdmin->renderButton());
         // Form
         $social_id = Request::getInt('social_id', 0);
         if ($social_id == 0) {
@@ -108,7 +108,7 @@ switch ($op) {
         } else {
             $obj = $socialHandler->get($social_id);
             $form = $obj->getForm();
-            $xoopsTpl->assign('form', $form->render()); 
+            $xoopsTpl->assign('form', $form->render());
         }
 
         break;
@@ -119,7 +119,7 @@ switch ($op) {
         }
         $social_id = Request::getInt('social_id', 0);
         if ($social_id == 0) {
-            $obj = $socialHandler->create();            
+            $obj = $socialHandler->create();
         } else {
             $obj = $socialHandler->get($social_id);
         }
@@ -129,11 +129,11 @@ switch ($op) {
             $form = $obj->getForm('social.php');
             $xoopsTpl->assign('form', $form->render());
         }
-        
+
         break;
-        
+
     // del
-    case 'del':    
+    case 'del':
         $social_id = Request::getInt('social_id', 0);
         if ($social_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NOSOCIAL);
@@ -150,13 +150,13 @@ switch ($op) {
                     $xoopsTpl->assign('error_message', $obj->getHtmlErrors());
                 }
             } else {
-                xoops_confirm(array('surdel' => true, 'social_id' => $social_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], 
+                xoops_confirm(array('surdel' => true, 'social_id' => $social_id, 'op' => 'del'), $_SERVER['REQUEST_URI'],
                                     sprintf(_MA_XMSOCIAL_SOCIAL_SUREDEL, '<br>' . $obj->getVar('social_name')));
             }
         }
-        
+
         break;
-        
+
     // Update status
     case 'social_update_status':
         $social_id = Request::getInt('social_id', 0);

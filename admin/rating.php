@@ -34,13 +34,13 @@ switch ($op) {
 		// Get start pager
         $start = Request::getInt('start', 0);
         $xoopsTpl->assign('start', $start);
-		
+
 		$RatingPlugin = new RatingPlugin();
 		$plugin_error = false;
-		
+
 		$module_handler = xoops_getHandler('module');
 		$modules_arr = $module_handler->getObjects();
-		$modules = array();		
+		$modules = array();
 		foreach (array_keys($modules_arr) as $i) {
 			$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
 			$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
@@ -64,7 +64,7 @@ switch ($op) {
 				if ($module != 0){
 					if ($rating_arr[$i]->getVar('rating_modid') == $module){
 						$item_temp_arr[] = $rating_arr[$i]->getVar('rating_itemid');
-					}					
+					}
 				}
 			}
 			// filtre uname
@@ -73,15 +73,15 @@ switch ($op) {
 				$uname_options = '<option value="-1"' . ($uname == -1 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
 				foreach (array_keys($uname_arr) as $i) {
 					$uname_options .= '<option value="' . $i . '"' . ($uname == $i ? ' selected="selected"' : '') . '>' . $uname_arr[$i] . '</option>';
-				}				
+				}
 				$xoopsTpl->assign('uname_options', $uname_options);
-			}		
-			// filtre module		
+			}
+			// filtre module
 			if (count($module_arr) > 0) {
 				$module_options = '<option value="0"' . ($module == 0 ? ' selected="selected"' : '') . '>' . _ALL .'</option>';
 				foreach (array_keys($module_arr) as $i) {
 					$module_options .= '<option value="' . $i . '"' . ($module == $i ? ' selected="selected"' : '') . '>' . $module_arr[$i] . '</option>';
-				}				
+				}
 				$xoopsTpl->assign('module_options', $module_options);
 			}
 			// filtre item
@@ -96,15 +96,15 @@ switch ($op) {
 								$item_name = substr($item_arr[$i],0 , 30) . '...';
 							} else {
 								$item_name = $item_arr[$i];
-							}	
+							}
 							$item_options .= '<option value="' . $i . '"' . ($item == $i ? ' selected="selected"' : '') . '>' . $item_name . '</option>';
-						}				
+						}
 						$xoopsTpl->assign('item_options', $item_options);
 						$xoopsTpl->assign('view_item', true);
 					} else {
 						$item == 0;
 						$plugin_error = true;
-					}					
+					}
 				}
 			}
 			// Criteria
@@ -125,7 +125,7 @@ switch ($op) {
 			$rating_arr = $ratingHandler->getall($criteria);
 			$rating_count = $ratingHandler->getCount($criteria);
 			$xoopsTpl->assign('rating_count', $rating_count);
-			$uname_arr = array();        
+			$uname_arr = array();
             foreach (array_keys($rating_arr) as $i) {
                 $rating['id']          = $rating_arr[$i]->getVar('rating_id');
                 $rating['itemid']      = $rating_arr[$i]->getVar('rating_itemid');
@@ -134,9 +134,9 @@ switch ($op) {
 				} else {
 					$rating['modulename']  = $modules[$rating_arr[$i]->getVar('rating_modid')]['name'];
 					$rating['isactive']    = $modules[$rating_arr[$i]->getVar('rating_modid')]['isactive'];
-				}                
+				}
                 $rating['value']       = $rating_arr[$i]->getVar('rating_value');
-                $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));				
+                $rating['uid']         = XoopsUser::getUnameFromId($rating_arr[$i]->getVar('rating_uid'));
                 $rating['hostname']    = $rating_arr[$i]->getVar('rating_hostname');
 				if ($module != 0 && $plugin_error == false){
 					$rating['title']       = $item_arr[$rating_arr[$i]->getVar('rating_itemid')];
@@ -151,7 +151,7 @@ switch ($op) {
 					}
 				}
                 $rating['date']		   = formatTimestamp($rating_arr[$i]->getVar('rating_date'), 'm');
-                $xoopsTpl->append_by_ref('rating', $rating);
+                $xoopsTpl->appendByRef('rating', $rating);
                 unset($rating);
             }
             // Display Page Navigation
@@ -160,14 +160,14 @@ switch ($op) {
                 $xoopsTpl->assign('nav_menu', $nav->renderNav(4));
             }
         } else {
-            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);        
+            $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);
 		}
-        
+
         break;
-            
+
     // del
-    case 'del':    
-        $rating_id = Request::getInt('rating_id', 0);		
+    case 'del':
+        $rating_id = Request::getInt('rating_id', 0);
         if ($rating_id == 0) {
             $xoopsTpl->assign('error_message', _MA_XMSOCIAL_ERROR_NORATING);
         } else {
@@ -194,7 +194,7 @@ switch ($op) {
             } else {
 				$module_handler = xoops_getHandler('module');
 				$modules_arr = $module_handler->getObjects();
-				$modules = array();		
+				$modules = array();
 				foreach (array_keys($modules_arr) as $i) {
 					$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
 					$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
@@ -212,11 +212,11 @@ switch ($op) {
 						$itemidString = '<a href="' . $RatingPlugin->Url($modules[$obj->getVar('rating_modid')]['dirname'], $obj->getVar('rating_itemid'), $obj->getVar('rating_options')) . '" title="' . _MA_XMSOCIAL_RATING_VIEW . '" target="_blank">' . $item_name[$obj->getVar('rating_itemid')] . '</a>';
 						$modulename = $modules[$obj->getVar('rating_modid')]['dirname'];
 					}
-				}			
-                xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del', 'mod' => $modulename, 'itemid' => $obj->getVar('rating_itemid')), $_SERVER['REQUEST_URI'], 
+				}
+                xoops_confirm(array('surdel' => true, 'rating_id' => $rating_id, 'op' => 'del', 'mod' => $modulename, 'itemid' => $obj->getVar('rating_itemid')), $_SERVER['REQUEST_URI'],
                                     sprintf(_MA_XMSOCIAL_RATING_SUREDEL, '<br>' . $itemidString));
             }
-        }        
+        }
         break;
 
 	// purgel
@@ -227,19 +227,19 @@ switch ($op) {
 			if ($ratinglist_count > 0) {
 				$module_handler = xoops_getHandler('module');
 				$modules_arr = $module_handler->getObjects();
-				$modules = array();		
+				$modules = array();
 				foreach (array_keys($modules_arr) as $i) {
 					$modules[$modules_arr[$i]->getVar('mid')]['name']    = $modules_arr[$i]->getVar('name');
 					$modules[$modules_arr[$i]->getVar('mid')]['dirname'] = $modules_arr[$i]->getVar('dirname');
 				}
-				$RatingPlugin = new RatingPlugin();				
+				$RatingPlugin = new RatingPlugin();
 				$error_message = '';
-				for ($i = 0; $i < $ratinglist_count; ++$i) {										
+				for ($i = 0; $i < $ratinglist_count; ++$i) {
 					$obj  = $ratingHandler->get($_REQUEST['ratinglist_id'][$i]);
 					$itemid = $obj->getVar('rating_itemid');
 					$modid = $obj->getVar('rating_modid');
 					$modulename = $modules[$modid]['dirname'];
-					if ($ratingHandler->delete($obj)) {						
+					if ($ratingHandler->delete($obj)) {
 						if ($modulename != ''){
 							XmsocialUtility::updateRating($modulename, $itemid, $modid);
 						}

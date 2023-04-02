@@ -23,7 +23,7 @@ use Xmf\Module\Helper;
  * Class XmsocialUtility
  */
 class XmsocialUtility{
-	
+
 	public static function renderRating($modulename = '', $itemid = 0, $stars = 5, $rating = 0, $votes = 0, $options = array())
     {
 		$xmsocial_rating = array();
@@ -32,20 +32,20 @@ class XmsocialUtility{
 		$permHelper = new Helper\Permission('xmsocial');
 		$xmsocialHelper = Helper::getHelper('xmsocial');
 		$xmsocialHelper->loadLanguage('main');
-		if ($stars > 10){			
+		if ($stars > 10){
 			$stars = 10;
 		}
-		if ($stars < 3){			
+		if ($stars < 3){
 			$stars = 3;
 		}
 		$options = serialize($options);
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
-		if ($permHelper->checkPermission('xmsocial_rating', $moduleid) === false){	
+		if ($permHelper->checkPermission('xmsocial_rating', $moduleid) === false){
 			$xmsocial_rating['perm'] = false;
 		} else {
 			$xoTheme->addStylesheet( XOOPS_URL . '/modules/xmsocial/assets/css/rating.css', null );
-			$xmsocial_rating['perm'] = true;			
+			$xmsocial_rating['perm'] = true;
 			for ($count = 1; $count <= $stars; $count++){
 				$count_stars = $count;
 				$xmsocial_rating['stars'][] = $count_stars;
@@ -54,16 +54,16 @@ class XmsocialUtility{
 			$xmsocial_rating['module'] = $modulename;
 			$xmsocial_rating['size'] = number_format(25 * $rating, 1) . 'px';
 			$xmsocial_rating['itemid'] = $itemid;
-		}			
+		}
 		$xmsocial_rating['votes'] = $votes;
 		$xmsocial_rating['rating'] = number_format($rating, 1);
 		if ($votes < 2) {
 			$xmsocial_rating['text'] = _MA_XMSOCIAL_RATING_VOTE;
-		} else {		
+		} else {
 			$xmsocial_rating['text'] = _MA_XMSOCIAL_RATING_VOTES;
 		}
 		$xmsocial_rating['options'] = $options;
-		
+
 		return $xmsocial_rating;
     }
 
@@ -75,14 +75,14 @@ class XmsocialUtility{
 	public static function renderVotes($rating = 0, $votes = 0)
     {
 		$xmsocialHelper = Helper::getHelper('xmsocial');
-		$xmsocialHelper->loadLanguage('main');	
+		$xmsocialHelper->loadLanguage('main');
 		$xmsocial_rating = number_format($rating, 1) . ' ';
 		if ($votes < 2) {
 			$xmsocial_rating .= '(' . $votes . ' ' . _MA_XMSOCIAL_RATING_VOTE .')';
-		} else {		
+		} else {
 			$xmsocial_rating .= '(' . $votes . ' ' . _MA_XMSOCIAL_RATING_VOTES .')';
 		}
-		
+
 		return $xmsocial_rating;
     }
 
@@ -161,10 +161,10 @@ class XmsocialUtility{
 			}
 		} else {
 			$value = array();
-		}	
+		}
 		// Criteria
         $criteria = new CriteriaCompo();
-		$criteria->add(new Criteria('social_status', 1));	
+		$criteria->add(new Criteria('social_status', 1));
         $criteria->setSort('social_weight ASC, social_name');
         $criteria->setOrder('ASC');
 		$social_arr = $socialHandler->getall($criteria);
@@ -215,7 +215,7 @@ class XmsocialUtility{
 							$obj  = $socialdataHandler->create();
 							$obj->setVar('socialdata_socialid', $i);
 							$obj->setVar('socialdata_modid', $moduleid);
-							$obj->setVar('socialdata_itemid', $itemid);					
+							$obj->setVar('socialdata_itemid', $itemid);
 							if ($socialdataHandler->insert($obj)){
 								$error_message .= '';
 							} else {
@@ -235,7 +235,7 @@ class XmsocialUtility{
 		} else {
 			$criteria = new CriteriaCompo();
 			$criteria->add(new Criteria('socialdata_modid', $moduleid));
-			$criteria->add(new Criteria('socialdata_itemid', $itemid));			
+			$criteria->add(new Criteria('socialdata_itemid', $itemid));
 			$socialdataHandler->deleteAll($criteria);
 		}
         return $error_message;
@@ -249,7 +249,7 @@ class XmsocialUtility{
 	public static function delSocialdata($modulename = '', $itemid = 0)
     {
         include __DIR__ . '/../include/common.php';
-		
+
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
@@ -270,7 +270,7 @@ class XmsocialUtility{
         include __DIR__ . '/../include/common.php';
 		include_once __DIR__ . '/SocialPlugin.php';
 		global $xoopsTpl;
-		
+
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		$criteria = new CriteriaCompo();
@@ -279,7 +279,7 @@ class XmsocialUtility{
 		$criteria->add(new Criteria('social_status', 1));
 		$criteria->setSort('social_weight ASC, social_name');
 		$criteria->setOrder('ASC');
-		
+
 		$socialdataHandler->table_link = $socialdataHandler->db->prefix("xmsocial_social");
 		$socialdataHandler->field_link = "social_id";
 		$socialdataHandler->field_object = "socialdata_socialid";
@@ -289,7 +289,7 @@ class XmsocialUtility{
 			foreach (array_keys($social_arr) as $i) {
 				$options = explode(',', $social_arr[$i]->getVar('social_options'));
 				$social = $SocialPlugin->render($social_arr[$i]->getVar('social_type'), $url, $options);
-                $xoopsTpl->append_by_ref('social_arr', $social);
+                $xoopsTpl->appendByRef('social_arr', $social);
                 unset($social);
 			}
 		} else {
