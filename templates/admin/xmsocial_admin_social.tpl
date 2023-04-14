@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    IMG_ON = '<{xoAdminIcons "success.png"}>';
-    IMG_OFF = '<{xoAdminIcons "cancel.png"}>';
+    IMG_ON = "<{xoAdminIcons 'success.png'}>";
+    IMG_OFF = "<{xoAdminIcons 'cancel.png'}>";
 </script>
 <div>
     <{$renderbutton|default:''}>
@@ -24,7 +24,7 @@
         <tr>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_SOCIAL_RENDER}></th>
             <th class="txtleft width15"><{$smarty.const._MA_XMSOCIAL_SOCIAL_TYPE}></th>
-            <th class="txtleft width15"><{$smarty.const._MA_XMSOCIAL_SOCIAL_NAME}></th>         
+            <th class="txtleft width15"><{$smarty.const._MA_XMSOCIAL_SOCIAL_NAME}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSOCIAL_SOCIAL_WEIGHT}></th>
             <th class="txtcenter width5"><{$smarty.const._MA_XMSOCIAL_STATUS}></th>
             <th class="txtcenter width10"><{$smarty.const._MA_XMSOCIAL_ACTION}></th>
