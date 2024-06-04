@@ -1,6 +1,6 @@
 ﻿-------------------------------------------------
-Version: 2.1.0 Alpha
-Date:    02.01.2023
+Version: 2.1.0 Stable
+Date:    04.06.2024
 -------------------------------------------------
 Bug fixes:
 	- Error in xmcontent rating plugin
@@ -35,13 +35,13 @@ Bug fixes:
 	- Index.php was displayed in the list of social media plugins when adding a social media
 
 Improvements:
-	- Optimization of renderRating () and renderSocial (xmsocialutility) functions. This modification breaks the backward compatibility of the module, it will not work with incompatible modules. 
+	- Optimization of renderRating () and renderSocial (xmsocialutility) functions. This modification breaks the backward compatibility of the module, it will not work with incompatible modules.
 
 Security:
-	- 
+	-
 
 
-Correction de bogues:	
+Correction de bogues:
 	- Index.php était affiché dans la liste des plugins médias sociaux lors de l'ajout d'un média social.
 
 Améliorations:
