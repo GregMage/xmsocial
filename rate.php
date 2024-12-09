@@ -26,7 +26,11 @@ include_once XOOPS_ROOT_PATH . '/header.php';
 $modulename = Request::getString('mod', '');
 $itemid = Request::getInt('itemid', 0);
 $rating = Request::getInt('rating', 0);
-$options = unserialize(Request::getString('opt', ''));
+$options = json_decode(Request::getString('opt', ''), true);
+if (json_last_error() !== JSON_ERROR_NONE || !is_array($options)) {
+	$options = array();
+	redirect_header(XOOPS_URL, 5, _NOPERM);
+}
 
 if ($modulename == '' || $itemid == 0 || $rating < 1 || $rating > 10){
 	redirect_header(XOOPS_URL, 2, _NOPERM);
@@ -41,7 +45,7 @@ if ($RatingPlugin->CheckPlugin($modulename) == false){
 $redirect_url = $RatingPlugin->RedirectUrl($modulename, $itemid, $options);
 $helper = Helper::getHelper($modulename);
 $moduleid = $helper->getModule()->getVar('mid');
-if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){	
+if ($permHelper->checkPermission('xmsocial_rating',$moduleid) === false){
 	redirect_header($redirect_url, 3, _NOPERM);
 }
 $userid = !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
@@ -54,7 +58,7 @@ if ($xoopsUser){
 	$criteria->add(new Criteria('rating_hostname', getenv("REMOTE_ADDR")));
 }
 $rating_count = $ratingHandler->getCount($criteria);
-if ($rating_count > 0) {	
+if ($rating_count > 0) {
 		redirect_header($redirect_url, 5, _MA_XMSOCIAL_RATE_ALREADYVOTED);
 }
 $obj = $ratingHandler->create();
@@ -65,12 +69,12 @@ $obj->setVar('rating_uid', !empty($xoopsUser) ? $xoopsUser->getVar('uid') : 0);
 $obj->setVar('rating_hostname', getenv("REMOTE_ADDR"));
 $obj->setVar('rating_date', time());
 $obj->setVar('rating_options', $options);
-if ($ratingHandler->insert($obj)){	
+if ($ratingHandler->insert($obj)){
 	if (XmsocialUtility::updateRating($modulename, $itemid, $moduleid) == true){
 		redirect_header($redirect_url, 3, _MA_XMSOCIAL_RATE_RATED);
 	} else {
 		redirect_header($redirect_url, 5, _MA_XMSOCIAL_RATE_NOTRATED);
-	}	
+	}
 } else {
 	$obj->getHtmlErrors();
 }

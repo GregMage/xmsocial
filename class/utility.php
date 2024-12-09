@@ -38,7 +38,7 @@ class XmsocialUtility{
 		if ($stars < 3){
 			$stars = 3;
 		}
-		$options = serialize($options);
+		$options = json_encode($options);
 		$helper = Helper::getHelper($modulename);
 		$moduleid = $helper->getModule()->getVar('mid');
 		if ($permHelper->checkPermission('xmsocial_rating', $moduleid) === false){
