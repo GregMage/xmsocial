@@ -16,7 +16,7 @@
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @author          Mage Gregory (AKA Mage)
  */
- 
+
 use \Xmf\Request;
 use Xmf\Module\Helper;
 
@@ -32,7 +32,7 @@ use Xmf\Module\Helper;
       */
 	public static function RedirectUrl($itemid, $options)
 	{
-		return XOOPS_URL . '/modules/xmarticle/viewarticle.php?category_id=' . $options['cat'] . '&article_id=' . $itemid;
+		return XOOPS_URL . '/modules/xmarticle/viewarticle.php?article_id=' . $itemid;
 	}
 
      /**
@@ -91,5 +91,5 @@ use Xmf\Module\Helper;
 			return array();
 		}
 	}
-	 
+
  }

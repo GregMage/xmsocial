@@ -6,7 +6,7 @@ Bug fixes:
 	- /
 
 Improvements:
-	- /
+	- The category id is no longer required in the article link (xarticle).
 
 Security:
 	- /
@@ -15,7 +15,7 @@ Correction de bogues:
 	- /
 
 Améliorations:
-	- /
+	- L'id de la catégorie n'est plus nécessaire dans le lien d'un article (xmarticle).
 
 Sécurités:
 	/
